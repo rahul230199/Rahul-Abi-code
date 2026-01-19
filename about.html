@@ -6,6 +6,7 @@
     <title>About Us | AXO Networks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/1000055723.jpeg" type="image/png">
     <style>
         /* ========== EXACT STYLES FROM NETWORK ACCESS PAGE ========== */
         * {
@@ -449,12 +450,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--foreground);
             transition: width 0.4s ease;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--foreground);
             transform: translateY(-2px);
         }
 
@@ -1307,7 +1308,133 @@
             margin-bottom: 0.5rem;
             display: block;
         }
+        
+        @media (max-width: 480px) {
+
+    /* Header */
+    .header {
+        padding: 0.75rem 0;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    /* Hero */
+    .about-hero {
+        padding-top: 70px;
+    }
+
+    .about-hero-background {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    .hero-circle-1,
+    .hero-circle-2,
+    .hero-circle-3,
+    .hero-circle-4 {
+        display: none;
+    }
+
+    /* Buttons */
+    .primary-button,
+    .secondary-button,
+    .cta-button-large {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* Sections */
+    .mission-section,
+    .team-section,
+    .philosophy-section,
+    .join-section {
+        padding: 3rem 0;
+    }
+
+    /* Cards */
+    .feature-card,
+    .step-card,
+    .team-card {
+        padding: 1.25rem;
+    }
+
+    /* Blockquote */
+    blockquote {
+        font-size: 1.3rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 3rem 0 2rem;
+    }
+
+    .footer-bottom {
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+
+    /* Header */
+    .header {
+        padding: 0.9rem 0;
+    }
+
+    /* Hero */
+    .about-hero {
+        min-height: 85vh;
+    }
+
+    .about-hero-background {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    .hero-circle-1 {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-circle-2 {
+        width: 220px;
+        height: 220px;
+    }
+
+    /* Grid Adjustments */
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Section Padding */
+    .mission-section,
+    .team-section,
+    .philosophy-section {
+        padding: 5rem 0;
+        min-height: auto;
+    }
+
+    /* Buttons */
+    .primary-button,
+    .secondary-button,
+    .cta-button-large {
+        min-width: 220px;
+    }
+
+    /* Footer */
+    .footer-content {
+        gap: 2rem;
+    }
+}
+
     </style>
+    
+
 </head>
 <body>
     <!-- Loading Overlay -->

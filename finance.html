@@ -6,6 +6,7 @@
     <title>Financial Partners | AXO Networks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/1000055723.jpeg" type="image/png">
     <style>
         /* ========== APPLIED NETWORK ACCESS DESIGN SYSTEM ========== */
         * {
@@ -353,12 +354,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--foreground);
             transition: width 0.4s ease;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: var(--foreground);
             transform: translateY(-2px);
         }
 
@@ -1165,6 +1166,10 @@
         }
 
         @media (max-width: 480px) {
+            .hero-background {
+        background-attachment: scroll;
+        background-size: cover;
+    }
             .hero-title {
                 font-size: 2rem;
             }
