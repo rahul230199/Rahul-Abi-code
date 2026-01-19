@@ -155,22 +155,25 @@
         }
 
         .cta-button {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 9999px;
             font-weight: 700;
             font-size: 0.875rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
             cursor: pointer;
             font-family: 'Nunito Sans', sans-serif;
             text-decoration: none;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
+
         .cta-button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
         }
 
         .dropdown-menu {
@@ -243,7 +246,7 @@
         .contact-hero h1 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--primary-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -427,7 +430,7 @@
         .submit-button {
             width: 100%;
             padding: 1rem 2rem;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--foreground) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
             border-radius: 9999px;
@@ -443,7 +446,6 @@
         }
 
         .submit-button:hover {
-            background-color: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
         }
