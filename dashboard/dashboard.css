@@ -1,0 +1,102 @@
+:root {
+  --primary: #1E3A8A;
+  --primary-light: #3B82F6;
+  --primary-dark: #1E40AF;
+  --secondary: #10B981;
+  --accent: #F59E0B;
+  --foreground: #111827;
+  --foreground-light: #374151;
+  --background: #FFFFFF;
+  --light-grey: #F9FAFB;
+  --grey: #E5E7EB;
+  --sidebar-width: 260px;
+}
+
+/* --- MOBILE FIRST (Base Styles) --- */
+body {
+    background-color: var(--light-grey);
+    color: var(--foreground);
+    margin: 0;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column; /* Stacked on mobile */
+}
+
+.sidebar {
+    display: none; /* Hide sidebar on mobile */
+}
+
+.main-content {
+    padding: 1rem;
+    width: 100%;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 Column on mobile */
+    gap: 1rem;
+}
+
+.chart-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* --- TABLET RESPONSIVE --- */
+@media (min-width: 768px) {
+    .main-content {
+        padding: 2rem;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Columns on Tablet */
+    }
+
+    .header-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* --- DESKTOP RESPONSIVE --- */
+@media (min-width: 1024px) {
+    .dashboard-container {
+        flex-direction: row; /* Side-by-side on Desktop */
+    }
+
+    .sidebar {
+        display: flex;
+        width: var(--sidebar-width);
+        height: 100vh;
+        background-color: var(--primary);
+        color: white;
+        position: sticky;
+        top: 0;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 2.5rem;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 Columns on Desktop */
+    }
+
+    .chart-section {
+        flex-direction: row; /* Chart and Sidebar Info side-by-side */
+    }
+
+    .chart-main {
+        flex: 2;
+    }
+
+    .chart-info {
+        flex: 1;
+    }
+}
