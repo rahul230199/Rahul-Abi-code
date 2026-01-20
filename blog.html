@@ -1696,25 +1696,25 @@
     <!-- ========== HEADER ========== -->
     <header class="header" id="mainHeader">
         <div class="header-content">
-            <a href="index.html" class="logo">AXO Networks</a>
+            <a href="/" class="logo">AXO Networks</a>
             <div class="nav-links">
-                <a href="Networkpage.html" class="nav-link">Network Access</a>
-                <a href="partdiscovery.html" class="nav-link">Part Discovery</a>
-                <a href="finance.html" class="nav-link">Financial Partners</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-                <a href="careers.html" class="nav-link">Careers</a>
-                <a href="login.html" class="cta-button" style="margin-left: 1rem;">Login</a>
+                <a href="/network-access" class="nav-link">Network Access</a>
+                <a href="/part-discovery" class="nav-link">Part Discovery</a>
+                <a href="/financial-partners" class="nav-link">Financial Partners</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/careers" class="nav-link">Careers</a>
+                <a href="/portal-login" class="cta-button" style="margin-left: 1rem;">Login</a>
             </div>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="Networkpage.html" class="dropdown-item">Network Access</a>
-                <a href="partdiscovery.html" class="dropdown-item">Part Discovery</a>
-                <a href="finance.html" class="dropdown-item">Financial Partners</a>
-                <a href="about.html" class="dropdown-item">About</a>
-                <a href="blog.html" class="dropdown-item">Blog</a>
-                <a href="careers.html" class="dropdown-item">Careers</a>
-                <a href="login.html" class="dropdown-item" style="color: var(--primary); font-weight: 800;">Login</a>
+                <a href="/network-access" class="dropdown-item">Network Access</a>
+                <a href="/part-discovery" class="dropdown-item">Part Discovery</a>
+                <a href="/financial-partners" class="dropdown-item">Financial Partners</a>
+                <a href="/about" class="dropdown-item">About</a>
+                <a href="/blog" class="dropdown-item">Blog</a>
+                <a href="/careers" class="dropdown-item">Careers</a>
+                <a href="/portal-login" class="dropdown-item" style="color: var(--primary); font-weight: 800;">Login</a>
             </div>
         </div>
     </header>
@@ -1907,16 +1907,19 @@
                     <p class="newsletter-description">
                         Get insights on EV manufacturing, operations, and scale delivered to your inbox.
                     </p>
-                    <div class="newsletter-form">
+                    <!-- Updated Newsletter Form with email functionality -->
+                    <form id="newsletterForm" class="newsletter-form">
                         <input
                             type="email"
+                            name="email"
                             placeholder="Enter your email"
                             class="newsletter-input"
+                            required
                         />
-                        <button class="newsletter-button">
+                        <button type="submit" class="newsletter-button">
                             Subscribe
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1943,16 +1946,16 @@
                 </div>
                 <div>
                     <h4>Quick links</h4>
-                    <a href="Networkpage.html">Network Access</a>
-                    <a href="partdiscovery.html">Part Discovery</a>
-                    <a href="finance.html">Financial Partners</a>
+                    <a href="/network-access">Network Access</a>
+                    <a href="/part-discovery">Part Discovery</a>
+                    <a href="/financial-partners">Financial Partners</a>
                 </div>
                 <div>
                     <h4>Company</h4>
-                    <a href="about.html">About</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="careers.html">Careers</a>
-                    <a href="contact.html">Contact Us</a>
+                    <a href="/about">About</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/careers">Careers</a>
+                    <a href="/contact">Contact Us</a>
                 </div>
                 <div>
                     <h4>Legal</h4>
@@ -2066,8 +2069,8 @@
         }
     });
 
-    // Newsletter form submission
-    const newsletterForm = document.querySelector('.newsletter-form');
+    // Newsletter form submission - UPDATED WITH EMAIL FUNCTIONALITY
+    const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -2075,7 +2078,19 @@
             const email = emailInput.value;
 
             if (email && validateEmail(email)) {
-                alert('Thank you for subscribing to our newsletter!');
+                // Create a mailto link that opens the user's email client
+                const subject = "New Newsletter Subscription";
+                const body = "Thank you for subscribing to AXO Networks Blog!\n\nWe appreciate your interest in our insights on EV manufacturing, operations, and scale.\n\nYou'll now receive updates on the latest articles and thought leadership from the operating layer.\n\nBest regards,\nAXO Networks Team";
+                
+                const mailtoLink = `mailto:auroxorigin@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Open the email client
+                window.location.href = mailtoLink;
+                
+                // Show confirmation message
+                alert('Thank you for subscribing! Please check your email client to complete the subscription. A "Thank you for subscribing" message has been prepared for you.');
+                
+                // Reset the form
                 emailInput.value = '';
             } else {
                 alert('Please enter a valid email address.');
