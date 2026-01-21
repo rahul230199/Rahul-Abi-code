@@ -223,35 +223,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Loading Animation - SAME AS NETWORK ACCESS */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--light-grey);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
 
         .blueprint-grid {
             position: absolute;
@@ -1186,10 +1157,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
 
     <!-- Progress Bar -->
     <div class="progress-container">
@@ -1499,17 +1466,6 @@
     </footer>
 
     <script>
-        // ========== ANIMATION CODE FROM NETWORK ACCESS ==========
-        // Loading screen
-        window.addEventListener('load', function() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-                setTimeout(() => {
-                    loadingOverlay.style.display = 'none';
-                }, 500);
-            }, 800);
-        });
 
         // Progress bar
         window.addEventListener('scroll', function() {

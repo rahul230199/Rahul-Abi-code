@@ -318,36 +318,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--light-grey);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
         .blueprint-grid {
             position: absolute;
             inset: 0;
@@ -2054,10 +2024,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
 
     <!-- Progress Bar -->
     <div class="progress-container">
@@ -2079,9 +2045,9 @@
             </div>
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="/network-accesss" class="dropdown-item">Network Access</a>
+                <a href="/network-access" class="dropdown-item">Network Access</a>
                 <a href="/part-discovery" class="dropdown-item">Part Discovery</a>
-                <a href="/finance-partners" class="dropdown-item">Financial Partners</a>
+                <a href="/financial-partners" class="dropdown-item">Financial Partners</a>
                 <a href="/about" class="dropdown-item">About</a>
                 <a href="/blog" class="dropdown-item">Blog</a>
                 <a href="/careers" class="dropdown-item">Careers</a>
@@ -2438,16 +2404,6 @@
 
 <script>
     // ========== ANIMATION CODE FROM PART DISCOVERY ==========
-    // Loading screen
-    window.addEventListener('load', function() {
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 500);
-        }, 800);
-    });
 
     // Progress bar
     window.addEventListener('scroll', function() {

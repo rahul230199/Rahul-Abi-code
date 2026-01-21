@@ -318,36 +318,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--light-grey);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
         .blueprint-grid {
             position: absolute;
             inset: 0;
@@ -1024,25 +994,7 @@
             max-width: 48rem;
             margin: 0 auto;
             line-height: 1.6;
-        }
-
-        /* Loading spinner */
-        .loading-spinner {
-            display: none;
-            text-align: center;
-            padding: 3rem 0;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1.5rem;
-        }
+    }
 
         /* Error message */
         .error-message {
@@ -1287,10 +1239,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
 
     <!-- Progress Bar -->
     <div class="progress-container">
@@ -1304,7 +1252,7 @@
             <div class="nav-links">
                 <a href="/network-access" class="nav-link">Network Access</a>
                 <a href="/part-discovery" class="nav-link">Part Discovery</a>
-                <a href="/finance-partners" class="nav-link">Financial Partners</a>
+                <a href="/financial-partners" class="nav-link">Financial Partners</a>
                 <a href="/about" class="nav-link">About</a>
                 <a href="/blog" class="nav-link">Blog</a>
                 <a href="/careers" class="nav-link">Careers</a>
@@ -1314,7 +1262,7 @@
             <div class="dropdown-menu" id="dropdownMenu">
                 <a href="/network-access" class="dropdown-item">Network Access</a>
                 <a href="/part-discovery" class="dropdown-item">Part Discovery</a>
-                <a href="/finance-partners" class="dropdown-item">Financial Partners</a>
+                <a href="/financial-partners" class="dropdown-item">Financial Partners</a>
                 <a href="/about" class="dropdown-item">About</a>
                 <a href="/blog" class="dropdown-item">Blog</a>
                 <a href="/careers" class="dropdown-item">Careers</a>
@@ -1675,16 +1623,6 @@
 
 <script>
     // ========== ANIMATION CODE FROM PART DISCOVERY ==========
-    // Loading screen
-    window.addEventListener('load', function() {
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 500);
-        }, 800);
-    });
 
     // Progress bar
     window.addEventListener('scroll', function() {
