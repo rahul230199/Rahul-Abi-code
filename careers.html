@@ -318,36 +318,6 @@
             transition: width 0.3s ease;
         }
 
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--light-grey);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
         .blueprint-grid {
             position: absolute;
             inset: 0;
@@ -1395,10 +1365,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
 
     <!-- Progress Bar -->
     <div class="progress-container">
@@ -1632,7 +1598,7 @@
                             Whether you're an engineer, operator, designer, or strategist, if you care about building infrastructure that matters, we'd love to hear from you.
                         </p>
                         <div style="margin-top: 1.5rem;">
-                            <a href="mailto:careers@axonetworks.com" class="email-link">
+                            <a href="/network-access" class="primary-button">
                                 Get in Touch <i class="fas fa-arrow-right" style="font-size: 0.875rem;"></i>
                             </a>
                         </div>
@@ -1663,7 +1629,7 @@
                         Join us in building the operating layer for India's EV manufacturing ecosystem.
                     </p>
                     <div class="button-group">
-                        <a href="mailto:careers@axonetworks.com" class="primary-button">
+                        <a href="/network-access" class="primary-button">
                             <span>Get in Touch <i class="fas fa-arrow-right"></i></span>
                         </a>
                         <a href="/" class="secondary-button">
@@ -1724,17 +1690,6 @@
     </footer>
 
 <script>
-    // ========== ANIMATION CODE FROM NETWORK ACCESS PAGE ==========
-    // Loading screen
-    window.addEventListener('load', function() {
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 500);
-        }, 800);
-    });
 
     // Progress bar
     window.addEventListener('scroll', function() {
