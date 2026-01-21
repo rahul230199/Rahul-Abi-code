@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AXO Networks - Form Submissions Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ... (Your existing root and base styles) ... */
         :root {
             --primary: #1E3A8A;
             --primary-light: #3B82F6;
@@ -22,7 +16,6 @@
             --warning: #F59E0B;
             --danger: #EF4444;
             --foreground: #111827;
-            --foreground-light: #374151;
             --background: #FFFFFF;
             --light-grey: #F9FAFB;
             --grey: #E5E7EB;
@@ -30,1041 +23,256 @@
             --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--foreground);
-            background-color: var(--light-grey);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
             font-family: 'Nunito Sans', sans-serif;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
+            background-color: var(--light-grey);
+            color: var(--foreground);
         }
 
-        .container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
 
-        /* Header */
+        /* --- Header & Hamburger --- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
+            background: white;
+            padding: 1rem 2rem;
             border-bottom: 1px solid var(--grey);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--foreground);
-            letter-spacing: -0.02em;
-        }
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); }
 
-        /* User Info & Logout */
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-left: auto;
-            margin-right: 1rem;
-        }
+        .nav-controls { display: flex; align-items: center; gap: 1.5rem; }
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--foreground);
-        }
-
-        .user-role {
-            font-size: 0.75rem;
-            color: var(--dark-grey);
-        }
-
-        .logout-btn {
-            background-color: #EF4444;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            border: none;
+        .hamburger {
+            display: none;
             cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
         }
 
-        .logout-btn:hover {
-            background-color: #DC2626;
-            transform: scale(1.05);
-        }
-
-        /* Stats Cards */
+        /* --- Stats & Table --- */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
         .stat-card {
             background: white;
-            border-radius: 12px;
             padding: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--grey);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--dark-grey);
-            font-size: 0.875rem;
-        }
-
-        /* Status Badges */
-        .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .status-pending {
-            background-color: rgba(245, 158, 11, 0.1);
-            color: var(--warning);
-        }
-
-        .status-approved {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .status-rejected {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        /* Card Styles */
-        .card {
-            background: white;
             border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--grey);
-            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
 
-        .card-title {
-            font-size: 1.25rem;
+        .card { background: white; border-radius: 12px; border: 1px solid var(--grey); overflow: hidden; }
+        .table-container { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { background: var(--light-grey); padding: 1rem; text-align: left; font-size: 0.85rem; }
+        .data-table td { padding: 1rem; border-top: 1px solid var(--grey); font-size: 0.9rem; }
+
+        /* --- Badges & Buttons --- */
+        .status-badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: var(--foreground);
         }
+        .status-PENDING { background: #fef3c7; color: #92400e; }
+        .status-APPROVED { background: #d1fae5; color: #065f46; }
+        .status-REJECTED { background: #fee2e2; color: #991b1b; }
 
-        /* Button Styles */
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background-color: white;
-            color: var(--foreground);
-            border: 1px solid var(--grey);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Table Styles */
-        .table-container {
-            overflow-x: auto;
-            margin-top: 1rem;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table th {
-            text-align: left;
-            padding: 1rem;
-            background-color: var(--light-grey);
+            border: none;
             font-weight: 600;
-            color: var(--foreground);
-            border-bottom: 2px solid var(--grey);
+            transition: 0.2s;
         }
+        .btn-view { background: var(--primary); color: white; }
 
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--grey);
-        }
-
-        .data-table tr:hover {
-            background-color: var(--light-grey);
-        }
-
-        /* Form Detail Modal */
+        /* --- Modal --- */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            padding: 2rem;
+            overflow-y: auto;
         }
-
         .modal-content {
             background: white;
-            border-radius: 12px;
+            max-width: 700px;
+            margin: auto;
             padding: 2rem;
-            max-width: 800px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--grey);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark-grey);
-        }
-
-        /* Form Detail Sections */
-        .detail-section {
-            margin-bottom: 2rem;
-        }
-
-        .detail-section h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-grey);
-        }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .detail-item {
-            margin-bottom: 0.75rem;
-        }
-
-        .detail-label {
-            font-weight: 600;
-            color: var(--foreground-light);
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .detail-value {
-            color: var(--foreground);
-            font-size: 0.95rem;
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            border: 3px solid var(--grey);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .loading-text {
-            margin-left: 1rem;
-            color: var(--dark-grey);
-        }
-
-        /* Error Message */
-        .error-message {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 4px solid var(--danger);
-        }
-
-        /* Status Update Buttons */
-        .status-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .status-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .approve-btn {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .approve-btn:hover {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .reject-btn {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-        }
-
-        .reject-btn:hover {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        /* Login Required Message */
-        .login-required {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
             border-radius: 12px;
-            margin: 2rem auto;
-            max-width: 500px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        .login-required h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .login-required p {
-            color: var(--dark-grey);
-            margin-bottom: 2rem;
-        }
-
-        .login-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: var(--transition);
-        }
-
-        .login-btn:hover {
-            background-color: var(--primary-dark);
-            transform: scale(1.05);
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                display: none; /* Hide by default on mobile */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 2px solid var(--primary);
+            }
+            .nav-menu.active { display: flex; }
+            .user-info { flex-direction: row-reverse; }
         }
     </style>
 </head>
 <body>
+
+    <header class="header">
+        <div class="logo">AXO <span style="color: var(--foreground-light)">NETWORKS</span></div>
+        
+        <div class="nav-controls">
+            <div id="userSection" class="nav-menu">
+                <div class="user-info" style="display: flex; align-items: center; gap: 10px; margin-right: 15px;">
+                    <div class="user-details" style="text-align: right;">
+                        <div class="user-name" id="userName" style="font-weight: 700; font-size: 0.9rem;">Admin</div>
+                        <div class="user-role" id="userRole" style="font-size: 0.7rem; color: var(--dark-grey);">Administrator</div>
+                    </div>
+                    <div class="user-avatar" id="userAvatar" style="width: 35px; height: 35px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">A</div>
+                </div>
+                <button class="btn" onclick="logout()" style="background: #fee2e2; color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <!-- Header with User Info -->
-        <div class="header">
-            <div class="logo">AXO Networks - Form Submissions</div>
-            <div id="userSection" style="display: none;">
-                <div class="user-info">
-                    <div class="user-avatar" id="userAvatar">A</div>
-                    <div class="user-details">
-                        <div class="user-name" id="userName">Admin User</div>
-                        <div class="user-role" id="userRole">Administrator</div>
-                    </div>
-                </div>
-                <button class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </button>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="totalSubmissions">0</div>
             </div>
-            <div id="actionButtons" style="display: none;">
-                <button class="btn btn-secondary" onclick="refreshData()">
-                    <i class="fas fa-sync-alt"></i>
-                    Refresh
-                </button>
-                <button class="btn btn-primary" style="margin-left: 0.5rem;" onclick="exportData()">
-                    <i class="fas fa-download"></i>
-                    Export CSV
-                </button>
+            <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value" style="color: var(--warning)" id="pendingCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Approved</div>
+                <div class="stat-value" style="color: var(--success)" id="approvedCount">0</div>
             </div>
         </div>
 
-        <!-- Login Required Message (shown when not logged in) -->
-        <div id="loginRequired" class="login-required" style="display: none;">
-            <h2>Authentication Required</h2>
-            <p>Please login to access the dashboard</p>
-            <a href="/portal-login" class="login-btn">
-                <i class="fas fa-sign-in-alt"></i>
-                Go to Login
-            </a>
-        </div>
-
-        <!-- Dashboard Content (shown when logged in) -->
-        <div id="dashboardContent" style="display: none;">
-            <!-- Statistics -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalSubmissions">0</div>
-                    <div class="stat-label">Total Submissions</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="pendingCount">0</div>
-                    <div class="stat-label">Pending Review</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="approvedCount">0</div>
-                    <div class="stat-label">Approved</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="rejectedCount">0</div>
-                    <div class="stat-label">Rejected</div>
-                </div>
-            </div>
-
-            <!-- Recent Submissions Table -->
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Recent Form Submissions</h2>
-                    <div class="status-filter">
-                        <select id="statusFilter" onchange="filterByStatus()" style="padding: 0.5rem; border: 1px solid var(--grey); border-radius: 6px;">
-                            <option value="all">All Status</option>
-                            <option value="PENDING">Pending</option>
-                            <option value="APPROVED">Approved</option>
-                            <option value="REJECTED">Rejected</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Company Name</th>
-                                <th>Contact Person</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Submitted</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="submissionsBody">
-                            <tr>
-                                <td colspan="9" class="loading">
-                                    <div class="spinner"></div>
-                                    <div class="loading-text">Loading submissions...</div>
-                                </td>
-                            </tr>
+        <div class="card">
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsBody">
                         </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form Detail Modal -->
-        <div id="detailModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Form Submission Details</h2>
-                    <button class="close-modal" onclick="closeModal()">&times;</button>
-                </div>
-
-                <div id="modalBody">
-                    <!-- Content will be loaded here -->
-                </div>
+                </table>
             </div>
         </div>
     </div>
 
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="position: absolute; right: 20px; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 id="modalTitle">Company Details</h2>
+            <hr style="margin: 1rem 0; opacity: 0.2;">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
     <script>
-        const API_BASE_URL = '/api';
-        let allSubmissions = [];
-        let filteredSubmissions = [];
-        let currentUser = null;
-
-        // Check authentication on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAuthentication();
-        });
-
-        // Check if user is authenticated
-        function checkAuthentication() {
-            // Check for token in localStorage (check both old and new key names)
-            const token = localStorage.getItem('authToken') || localStorage.getItem('token');
-            const userInfo = localStorage.getItem('userInfo') || localStorage.getItem('user');
-
-            if (token && userInfo) {
-                try {
-                    currentUser = JSON.parse(userInfo);
-                    showDashboard();
-                    loadSubmissions();
-                } catch (e) {
-                    console.error('Error parsing user info:', e);
-                    showLoginRequired();
-                }
-            } else {
-                showLoginRequired();
-            }
+        // --- Navigation Logic ---
+        function toggleMenu() {
+            const nav = document.getElementById('userSection');
+            nav.classList.toggle('active');
         }
 
-        // Show dashboard content when authenticated
-        function showDashboard() {
-            document.getElementById('userSection').style.display = 'flex';
-            document.getElementById('actionButtons').style.display = 'flex';
-            document.getElementById('dashboardContent').style.display = 'block';
-            document.getElementById('loginRequired').style.display = 'none';
+        // --- Mock Data (Replace with your API fetch) ---
+        let submissions = [
+            { _id: '1', companyName: 'EcoDrive Motors', contactName: 'John Doe', status: 'PENDING', submittedAt: '2023-10-01' },
+            { _id: '2', companyName: 'VoltSystems', contactName: 'Jane Smith', status: 'APPROVED', submittedAt: '2023-09-28' }
+        ];
 
-            // Update user info in header
-            if (currentUser) {
-                document.getElementById('userName').textContent = currentUser.name || currentUser.email || 'User';
-                document.getElementById('userRole').textContent = currentUser.role ? currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1) : 'User';
-                document.getElementById('userAvatar').textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
-            }
-        }
-
-        // Show login required message
-        function showLoginRequired() {
-            document.getElementById('userSection').style.display = 'none';
-            document.getElementById('actionButtons').style.display = 'none';
-            document.getElementById('dashboardContent').style.display = 'none';
-            document.getElementById('loginRequired').style.display = 'block';
-        }
-
-        // Logout function
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                // Clear all authentication data from localStorage
-                localStorage.removeItem('token');
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('user');
-                localStorage.removeItem('userInfo');
-                localStorage.removeItem('tempUserId');
-
-                // Redirect to login page
-                window.location.href = '/portal-login';
-            }
-        }
-
-        // Load all form submissions
-        async function loadSubmissions() {
-            try {
-                console.log('📥 Loading form submissions...');
-                showLoading();
-
-                const response = await fetch(`${API_BASE_URL}/network-request`);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-
-                if (result.success) {
-                    allSubmissions = result.data || [];
-                    filteredSubmissions = [...allSubmissions];
-
-                    updateStats();
-                    renderTable();
-                    console.log(`✅ Loaded ${allSubmissions.length} submissions`);
-                } else {
-                    throw new Error(result.message || 'Failed to load submissions');
-                }
-            } catch (error) {
-                console.error('Error loading submissions:', error);
-                showError('Failed to load submissions: ' + error.message);
-            }
-        }
-
-        // Update statistics
-        function updateStats() {
-            const total = allSubmissions.length;
-            const pending = allSubmissions.filter(s => s.status === 'PENDING').length;
-            const approved = allSubmissions.filter(s => s.status === 'APPROVED').length;
-            const rejected = allSubmissions.filter(s => s.status === 'REJECTED').length;
-
-            document.getElementById('totalSubmissions').textContent = total;
-            document.getElementById('pendingCount').textContent = pending;
-            document.getElementById('approvedCount').textContent = approved;
-            document.getElementById('rejectedCount').textContent = rejected;
-        }
-
-        // Render table with submissions
         function renderTable() {
             const tbody = document.getElementById('submissionsBody');
-            tbody.innerHTML = '';
-
-            if (filteredSubmissions.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="9" style="text-align: center; padding: 2rem; color: var(--dark-grey);">
-                            No submissions found
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            filteredSubmissions.forEach((submission, index) => {
-                const row = document.createElement('tr');
-
-                // Determine status badge
-                let statusClass = '';
-                let statusText = '';
-                switch(submission.status) {
-                    case 'PENDING':
-                        statusClass = 'status-pending';
-                        statusText = 'Pending';
-                        break;
-                    case 'APPROVED':
-                        statusClass = 'status-approved';
-                        statusText = 'Approved';
-                        break;
-                    case 'REJECTED':
-                        statusClass = 'status-rejected';
-                        statusText = 'Rejected';
-                        break;
-                    default:
-                        statusClass = 'status-pending';
-                        statusText = 'Pending';
-                }
-
-                // Determine company type from whatYouDo
-                let companyType = 'Unknown';
-                if (submission.whatYouDo && submission.whatYouDo.length > 0) {
-                    const types = submission.whatYouDo;
-                    if (types.includes('Manufacture finished EVs')) {
-                        companyType = 'Vehicle OEM';
-                    } else if (types.includes('Manufacture EV components')) {
-                        companyType = 'Component OEM';
-                    } else if (types.includes('Supply parts or materials')) {
-                        companyType = 'Supplier';
-                    } else if (types.includes('Provide manufacturing services')) {
-                        companyType = 'Service Provider';
-                    } else {
-                        companyType = types[0] || 'Unknown';
-                    }
-                }
-
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td><strong>${submission.companyName || 'N/A'}</strong></td>
-                    <td>${submission.contactName || 'N/A'}</td>
-                    <td>${submission.email || 'N/A'}</td>
-                    <td>${submission.phone || 'N/A'}</td>
-                    <td>${companyType}</td>
-                    <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                    <td>${new Date(submission.submittedAt).toLocaleDateString()}</td>
-                    <td>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn btn-secondary" onclick="viewDetails('${submission._id}')" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                            ${submission.status === 'PENDING' ? `
-                                <button class="status-btn approve-btn" onclick="updateStatus('${submission._id}', 'APPROVED')">
-                                    Approve
-                                </button>
-                                <button class="status-btn reject-btn" onclick="updateStatus('${submission._id}', 'REJECTED')">
-                                    Reject
-                                </button>
-                            ` : ''}
-                        </div>
-                    </td>
-                `;
-
-                tbody.appendChild(row);
-            });
+            tbody.innerHTML = submissions.map(s => `
+                <tr>
+                    <td><strong>${s.companyName}</strong></td>
+                    <td>${s.contactName}</td>
+                    <td><span class="status-badge status-${s.status}">${s.status}</span></td>
+                    <td>${s.submittedAt}</td>
+                    <td><button class="btn btn-view" onclick="viewDetails('${s._id}')">View</button></td>
+                </tr>
+            `).join('');
+            
+            updateStats();
         }
 
-        // Filter by status
-        function filterByStatus() {
-            const filter = document.getElementById('statusFilter').value;
-
-            if (filter === 'all') {
-                filteredSubmissions = [...allSubmissions];
-            } else {
-                filteredSubmissions = allSubmissions.filter(s => s.status === filter);
-            }
-
-            renderTable();
+        function updateStats() {
+            document.getElementById('totalSubmissions').innerText = submissions.length;
+            document.getElementById('pendingCount').innerText = submissions.filter(s => s.status === 'PENDING').length;
+            document.getElementById('approvedCount').innerText = submissions.filter(s => s.status === 'APPROVED').length;
         }
 
-        // View full details
-        async function viewDetails(submissionId) {
-            try {
-                const submission = allSubmissions.find(s => s._id === submissionId);
-                if (!submission) {
-                    alert('Submission not found');
-                    return;
-                }
+        function viewDetails(id) {
+            const data = submissions.find(s => s._id === id);
+            document.getElementById('modalBody').innerHTML = `
+                <p><strong>Company:</strong> ${data.companyName}</p>
+                <p><strong>Contact:</strong> ${data.contactName}</p>
+                <div style="margin-top: 20px;">
+                    <button class="btn" style="background: var(--success); color: white;" onclick="updateStatus('${id}', 'APPROVED')">Approve</button>
+                    <button class="btn" style="background: var(--danger); color: white;" onclick="updateStatus('${id}', 'REJECTED')">Reject</button>
+                </div>
+            `;
+            document.getElementById('detailModal').style.display = 'flex';
+        }
 
-                const modalBody = document.getElementById('modalBody');
-
-                // Format whatYouDo array
-                const whatYouDoList = submission.whatYouDo ?
-                    submission.whatYouDo.map(item => `<li>${item}</li>`).join('') :
-                    '<li>No data</li>';
-
-                modalBody.innerHTML = `
-                    <div class="detail-section">
-                        <h3>Company Information</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Company Name</div>
-                                <div class="detail-value">${submission.companyName || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Website</div>
-                                <div class="detail-value">${submission.website || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Registered Address</div>
-                                <div class="detail-value">${submission.registeredAddress || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">City / State</div>
-                                <div class="detail-value">${submission.cityState || 'N/A'}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h3>Contact Information</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Primary Contact</div>
-                                <div class="detail-value">${submission.contactName || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Role</div>
-                                <div class="detail-value">${submission.role || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Email</div>
-                                <div class="detail-value">${submission.email || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Phone</div>
-                                <div class="detail-value">${submission.phone || 'N/A'}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h3>Business Details</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">What They Do</div>
-                                <div class="detail-value"><ul style="padding-left: 1.5rem;">${whatYouDoList}</ul></div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Primary Product/Process</div>
-                                <div class="detail-value">${submission.primaryProduct || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Key Components/Services</div>
-                                <div class="detail-value">${submission.keyComponents || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Manufacturing Locations</div>
-                                <div class="detail-value">${submission.manufacturingLocations || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Monthly Capacity</div>
-                                <div class="detail-value">${submission.monthlyCapacity || 'N/A'}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Certifications</div>
-                                <div class="detail-value">${submission.certifications || 'N/A'}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h3>Role in EV Manufacturing</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Role</div>
-                                <div class="detail-value">${submission.roleInEV || 'N/A'}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h3>Why They Want to Join AXO</h3>
-                        <div class="detail-item">
-                            <div class="detail-value" style="background: var(--light-grey); padding: 1rem; border-radius: 8px; white-space: pre-line;">
-                                ${submission.whyJoinAXO || 'No reason provided'}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="detail-section">
-                        <h3>System Information</h3>
-                        <div class="detail-grid">
-                            <div class="detail-item">
-                                <div class="detail-label">Status</div>
-                                <div class="detail-value">
-                                    <span class="status-badge ${getStatusClass(submission.status)}">
-                                        ${submission.status || 'PENDING'}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Submitted At</div>
-                                <div class="detail-value">${new Date(submission.submittedAt).toLocaleString()}</div>
-                            </div>
-                            ${submission.verifiedAt ? `
-                                <div class="detail-item">
-                                    <div class="detail-label">Verified At</div>
-                                    <div class="detail-value">${new Date(submission.verifiedAt).toLocaleString()}</div>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-
-                    ${submission.status === 'PENDING' ? `
-                        <div style="display: flex; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--grey);">
-                            <button class="btn btn-primary" onclick="updateStatus('${submission._id}', 'APPROVED')">
-                                <i class="fas fa-check"></i> Approve Application
-                            </button>
-                            <button class="btn btn-secondary" onclick="updateStatus('${submission._id}', 'REJECTED')">
-                                <i class="fas fa-times"></i> Reject Application
-                            </button>
-                        </div>
-                    ` : ''}
-                `;
-
-                document.getElementById('detailModal').style.display = 'flex';
-            } catch (error) {
-                console.error('Error loading details:', error);
-                alert('Failed to load submission details');
+        function updateStatus(id, newStatus) {
+            const index = submissions.findIndex(s => s._id === id);
+            if (index !== -1) {
+                submissions[index].status = newStatus;
+                renderTable();
+                closeModal();
+                alert(`Status updated to ${newStatus}`);
             }
         }
 
-        // Update status of a submission
-        async function updateStatus(submissionId, status) {
-            if (!confirm(`Are you sure you want to ${status === 'APPROVED' ? 'approve' : 'reject'} this submission?`)) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/network-request/${submissionId}/status`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        status: status,
-                        notes: `Status updated to ${status} via dashboard`
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert(`Submission ${status === 'APPROVED' ? 'approved' : 'rejected'} successfully!`);
-
-                    // Reload data
-                    loadSubmissions();
-
-                    // Close modal if open
-                    closeModal();
-                } else {
-                    throw new Error(result.message || 'Failed to update status');
-                }
-            } catch (error) {
-                console.error('Error updating status:', error);
-                alert('Failed to update status: ' + error.message);
-            }
-        }
-
-        // Helper function for status class
-        function getStatusClass(status) {
-            switch(status) {
-                case 'PENDING': return 'status-pending';
-                case 'APPROVED': return 'status-approved';
-                case 'REJECTED': return 'status-rejected';
-                default: return 'status-pending';
-            }
-        }
-
-        // Close modal
         function closeModal() {
             document.getElementById('detailModal').style.display = 'none';
         }
 
-        // Show loading state
-        function showLoading() {
-            const tbody = document.getElementById('submissionsBody');
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="9" class="loading">
-                        <div class="spinner"></div>
-                        <div class="loading-text">Loading submissions...</div>
-                    </td>
-                </tr>
-            `;
+        function logout() {
+            if(confirm("Logout?")) window.location.href = "/login";
         }
 
-        // Show error
-        function showError(message) {
-            const tbody = document.getElementById('submissionsBody');
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="9" class="error-message">
-                        ${message}
-                    </td>
-                </tr>
-            `;
-        }
-
-        // Refresh data
-        function refreshData() {
-            loadSubmissions();
-        }
-
-        // Export data as CSV
-        function exportData() {
-            if (allSubmissions.length === 0) {
-                alert('No data to export');
-                return;
-            }
-
-            // Create CSV headers
-            let csv = 'ID,Company Name,Contact Person,Email,Phone,Type,Status,Submitted Date\n';
-
-            // Add data rows
-            allSubmissions.forEach((submission, index) => {
-                const companyType = submission.whatYouDo && submission.whatYouDo.length > 0 ?
-                    submission.whatYouDo[0] : 'Unknown';
-
-                csv += `${index + 1},"${submission.companyName || ''}","${submission.contactName || ''}","${submission.email || ''}","${submission.phone || ''}","${companyType}","${submission.status || ''}","${new Date(submission.submittedAt).toLocaleDateString()}"\n`;
-            });
-
-            // Create download link
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `axo-submissions-${new Date().toISOString().split('T')[0]}.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('detailModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
+        // Initialize
+        renderTable();
     </script>
 </body>
 </html>
