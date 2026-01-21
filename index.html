@@ -379,7 +379,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -390,11 +390,12 @@
 
 <script>
     // ========== ANIMATION CODE FROM PART DISCOVERY ==========
-
+const yearElement = document.getElementById("currentYear");
     // Progress bar
     window.addEventListener('scroll', function() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
         const scrolled = (winScroll / height) * 100;
         document.getElementById('progressBar').style.width = scrolled + '%';
     });
@@ -583,6 +584,10 @@
     if (workflowSection) {
         workflowObserver.observe(workflowSection);
     }
+    
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
 
     // Add smooth hover effects to buttons
     document.addEventListener('DOMContentLoaded', function() {

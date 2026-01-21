@@ -287,7 +287,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -297,13 +297,14 @@
     </footer>
 
 <script>
-
+  const yearElement = document.getElementById("currentYear");
    document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const header = document.getElementById('mainHeader');
     const progressBar = document.getElementById('progressBar');
     const parallaxLayer = document.getElementById('parallaxLayer');
+  
     let lastScrollTop = 0;
 
     // 1. UNIFIED SCROLL SYSTEM (Progress, Header, Parallax)
@@ -392,6 +393,9 @@
         });
     }
 
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

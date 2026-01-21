@@ -243,7 +243,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -253,6 +253,7 @@
     </footer>
 
 <script>
+    
 
     // Progress bar
     window.addEventListener('scroll', function() {
@@ -283,7 +284,7 @@
         
         lastScrollTop = scrollTop;
     });
-
+   
     // Complete Component Data
     const componentsData = {
         1: [
@@ -706,6 +707,11 @@
     // Initialize the application
     document.addEventListener('DOMContentLoaded', function() {
         console.log('DOM Loaded - Initializing Part Discovery with Smooth Animations');
+        const yearElement = document.getElementById("currentYear");
+        
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
         
         // Animation observer
         const observerOptions = { 
@@ -1115,6 +1121,7 @@
         } else {
             dependenciesSection.style.display = 'none';
         }
+ 
 
         // Update used by with staggered animation
         modalUsedBy.innerHTML = '';

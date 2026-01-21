@@ -232,7 +232,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -242,10 +242,12 @@
     </footer>
 
     <script>
+        const yearElement = document.getElementById("currentYear");
     document.addEventListener("DOMContentLoaded", function () {
         const header = document.querySelector(".header");
         const menuToggle = document.getElementById("menuToggle");
         const dropdownMenu = document.getElementById("dropdownMenu");
+        
         let lastScrollTop = 0;
 
         // 1. Header & Progress Logic
@@ -304,6 +306,10 @@
                 icon.classList.add('fa-bars');
                 icon.classList.remove('fa-times');
             });
+        }
+        
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
         }
 
         // 4. Form Submission Logic (Your existing code)

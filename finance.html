@@ -309,7 +309,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -320,10 +320,13 @@
 
     <script>
 
+        const yearElement = document.getElementById("currentYear");
+
        document.addEventListener('DOMContentLoaded', function() {
     // 1. HAMBURGER MENU LOGIC
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
+    
     const menuIcon = menuToggle.querySelector('i');
 
     if (menuToggle && dropdownMenu) {
@@ -374,6 +377,9 @@
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, { passive: true });
 
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
     // 3. REVEAL ANIMATIONS (Intersection Observer)
     const observerOptions = {
         threshold: 0.1,

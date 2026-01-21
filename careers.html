@@ -406,7 +406,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+          <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -416,11 +416,13 @@
     </footer>
 
     <script>
+      const yearElement = document.getElementById("currentYear");
       document.addEventListener("DOMContentLoaded", function () {
     const header = document.getElementById("mainHeader");
     const progressBar = document.getElementById("progressBar");
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
+    
     let lastScrollTop = 0;
 
     // 1. SCROLL PROGRESS & HEADER LOGIC
@@ -500,6 +502,9 @@
         });
     }
 
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
     // 4. PARALLAX HERO EFFECT
     // Move the background circles at a different speed than the text
     const parallaxLayer = document.getElementById("parallaxLayer");

@@ -207,8 +207,10 @@
     </div>
 
     <script>
+        const yearElement = document.getElementById("currentYear");
         // --- Navigation Logic ---
         function toggleMenu() {
+            
             const nav = document.getElementById('userSection');
             nav.classList.toggle('active');
         }
@@ -238,6 +240,10 @@
             document.getElementById('totalSubmissions').innerText = submissions.length;
             document.getElementById('pendingCount').innerText = submissions.filter(s => s.status === 'PENDING').length;
             document.getElementById('approvedCount').innerText = submissions.filter(s => s.status === 'APPROVED').length;
+        }
+        
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
         }
 
         function viewDetails(id) {

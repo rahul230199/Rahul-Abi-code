@@ -1665,3 +1665,97 @@
           transform: translateY(0);
         }
       }
+
+      /* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+
+/* --- TABLETS & SMALL LAPTOPS (1024px and below) --- */
+@media (max-width: 1024px) {
+    .part-discovery-container {
+        padding: 0 2rem;
+    }
+
+    .component-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* --- MOBILE DEVICES (768px and below) --- */
+@media (max-width: 768px) {
+    /* Hide Desktop Nav, enable Hamburger */
+    .nav-links {
+        display: none; 
+    }
+
+    .menu-toggle {
+        display: block; 
+    }
+
+    /* Hero Section adjustments */
+    .discovery-hero {
+        padding: 120px 1.5rem 60px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin: 1.5rem auto;
+    }
+
+    /* Grid becomes single column */
+    .component-grid {
+        grid-template-columns: 1fr; 
+        gap: 1rem;
+    }
+
+    .layer-header {
+        padding: 1.25rem;
+    }
+
+    /* Modal (Pop-up) responsive fixes */
+    .modal-content {
+        width: 95%;
+        margin: 10px auto;
+        padding: 1.5rem;
+        max-height: 90vh; /* Prevents modal from going off-screen */
+        overflow-y: auto; /* Adds scroll inside modal if content is long */
+    }
+
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Footer stacking */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* --- SMALL PHONES (480px and below) --- */
+@media (max-width: 480px) {
+    .primary-button, .secondary-button, .cta-button {
+        width: 100%; /* Full width buttons for easier tapping */
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+}

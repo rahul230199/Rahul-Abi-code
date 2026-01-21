@@ -1226,3 +1226,105 @@
                 font-size: 1.75rem;
             }
         }
+        /* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+
+/* --- TABLETS & SMALL LAPTOPS (1024px and below) --- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* --- MOBILE DEVICES (768px and below) --- */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-links {
+        display: none; /* Hidden - toggle via JS hamburger */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hero Section */
+    .network-hero {
+        padding: 100px 1.5rem 60px;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin: 1.5rem auto;
+    }
+
+    /* Cards & Grids */
+    .cards-grid, 
+    .steps-grid {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 1.25rem;
+    }
+
+    .feature-card, .step-card {
+        padding: 1.5rem;
+    }
+
+    /* Form Section */
+    .form-container {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .form-header h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* --- SMALL PHONES (480px and below) --- */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .primary-button, .secondary-button, .submit-button {
+        width: 100%; /* Full width for easy tapping */
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Input fields safety */
+    input, select, textarea {
+        font-size: 16px !important; /* Prevents iOS zoom on focus */
+    }
+}

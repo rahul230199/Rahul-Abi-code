@@ -595,16 +595,34 @@ img, video {
 
 /* Mobile dropdown menu full-width */
 @media (max-width: 1023px) {
-    .dropdown-menu {
-        right: 1rem;
-        left: 1rem;
-        width: auto;
-        min-width: unset;
-    }
+  /* Ensure the header doesn't clip the menu */
+  .header {
+    overflow: visible !important;
+    z-index: 1000 !important;
+  }
 
-    .dropdown-item {
-        font-size: 0.9rem;
-    }
+  /* Force dropdown to the front and fix its positioning */
+  .dropdown-menu {
+    position: fixed !important;
+    top: 70px; /* Adjust to match your header height */
+    left: 1.5rem;
+    right: 1.5rem;
+    width: auto;
+    z-index: 9999 !important;
+    background: white !important;
+    display: none; /* Controlled by 'active' class */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+  }
+
+  .dropdown-menu.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0);
+  }
 }
 
 /* Article typography scaling */
@@ -757,4 +775,112 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+
+/* --- TABLETS & SMALL LAPTOPS (1024px and below) --- */
+@media (max-width: 1024px) {
+    .part-discovery-container {
+        padding: 0 2rem;
+    }
+
+    .component-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* --- MOBILE DEVICES (768px and below) --- */
+@media (max-width: 768px) {
+    /* Header Navigation */
+    .nav-links {
+        display: none; /* Hide desktop links */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger button */
+    }
+
+    /* Hero Section */
+    .discovery-hero {
+        padding: 120px 1.5rem 60px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin: 1.5rem auto;
+    }
+
+    /* Part Discovery Grid */
+    .component-grid {
+        grid-template-columns: 1fr; /* Single column for phone */
+        gap: 1.25rem;
+    }
+
+    .layer-header {
+        padding: 1rem;
+    }
+
+    .layer-title h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Search Bar */
+    .search-container {
+        margin: 0 0 2rem 0;
+        width: 100%;
+    }
+
+    /* Detail Modal (Pop-up) */
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 1.5rem;
+        max-height: 90vh;
+        overflow-y: auto; /* Ensure long content is scrollable on mobile */
+    }
+
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* --- SMALL PHONES (480px and below) --- */
+@media (max-width: 480px) {
+    .primary-button, .secondary-button, .cta-button {
+        width: 100%; /* Full width buttons for easier tapping */
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .part-discovery-header h2 {
+        font-size: 1.5rem;
+    }
 }

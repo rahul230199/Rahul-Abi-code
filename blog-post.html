@@ -161,7 +161,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+                <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-linkedin"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -249,12 +249,13 @@ Scaling with precision isn't about moving faster. It's about building the system
         };
 
 
-
+const yearElement = document.getElementById("currentYear");
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const header = document.getElementById('mainHeader');
     const scrollProgress = document.getElementById('scrollProgress');
+    
 
     // 1. LOAD ARTICLE CONTENT
     function loadArticle() {
@@ -294,6 +295,10 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
         });
     }
+    
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
 
     // 3. SCROLL PROGRESS & HEADER
     window.addEventListener('scroll', () => {

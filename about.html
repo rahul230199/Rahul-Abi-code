@@ -338,7 +338,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 AXO Networks. All rights reserved.</p>
+          <p>&copy; <span id="currentYear"></span> AXO Networks. All rights reserved.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -354,71 +354,120 @@
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const parallaxLayer = document.getElementById("parallaxLayer");
+    const yearElement = document.getElementById("currentYear");
     let lastScrollTop = 0;
 
-    // --- 1. Combined Scroll Logic ---
+    
+
+    // --- 1. Combined Scroll Logic (Header & Progress) ---
     window.addEventListener("scroll", function () {
+        // Calculate scroll position
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (scrollTop / height) * 100;
 
-        // Progress Bar
-        if (progressBar) progressBar.style.width = scrolled + "%";
+        // Update Progress Bar if it exists
+        if (progressBar) {
+            progressBar.style.width = scrolled + "%";
+        }
 
-        // Header Background
-        if (scrollTop > 100) {
+        // Header Style Shift (Glassmorphism effect)
+        if (scrollTop > 50) {
             header.classList.add("scrolled");
         } else {
             header.classList.remove("scrolled");
         }
 
-        // Header Hide/Show
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
+        // Header Hide/Show on Scroll Logic
+        // We only hide the header if the mobile menu is NOT active
+        const isMenuOpen = dropdownMenu && dropdownMenu.classList.contains("active");
+        
+        if (scrollTop > lastScrollTop && scrollTop > 200 && !isMenuOpen) {
+            // Scrolling Down - Hide Header
             header.classList.add("hidden");
-            if(dropdownMenu) dropdownMenu.classList.remove("active");
         } else {
+            // Scrolling Up or at Top - Show Header
             header.classList.remove("hidden");
         }
         
-        // Parallax (Desktop Only)
+        // Desktop Parallax (Disabled on mobile for performance)
         if (parallaxLayer && window.innerWidth >= 1024) {
             parallaxLayer.style.transform = `translateY(${scrollTop * 0.4}px)`;
         }
 
-        lastScrollTop = scrollTop;
-    });
+        // Catch for mobile "bounce" scrolling (prevents negative values)
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+    }, { passive: true });
 
-    // --- 2. Mobile Menu Logic ---
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    // --- 2. Mobile Hamburger Menu Logic ---
     if (menuToggle && dropdownMenu) {
         menuToggle.addEventListener("click", function (e) {
+            // Stop event from bubbling to document (which would close it instantly)
             e.stopPropagation();
-            dropdownMenu.classList.toggle("active");
+            
+            // Toggle the menu
+            const isActive = dropdownMenu.classList.toggle("active");
+            
+            // Optional: Prevent background scrolling when menu is open
+            if (isActive) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "";
+            }
         });
 
-        document.addEventListener("click", () => dropdownMenu.classList.remove("active"));
+        // Close menu when clicking anywhere outside
+        document.addEventListener("click", function (e) {
+            if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                dropdownMenu.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+        });
         
+        // Auto-close menu if user resizes window to desktop size
         window.addEventListener("resize", () => {
-            if (window.innerWidth >= 1024) dropdownMenu.classList.remove("active");
+            if (window.innerWidth >= 1024) {
+                dropdownMenu.classList.remove("active");
+                document.body.style.overflow = "";
+            }
         });
     }
 
-    // --- 3. Reveal Observer ---
+    // --- 3. Intersection Observer (Reveal Animations) ---
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("is-visible");
                 
-                // Stagger Team Cards
-                if (entry.target.classList.contains("team-grid")) {
-                    entry.target.querySelectorAll(".team-card").forEach((card, i) => {
-                        card.style.transitionDelay = `${i * 0.1}s`;
+                // Stagger Logic for Grids (Team/Cards)
+                const isGrid = entry.target.classList.contains("team-grid") || 
+                             entry.target.classList.contains("cards-grid");
+                
+                if (isGrid) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, i) => {
+                        child.style.transitionDelay = `${i * 0.1}s`;
                     });
                 }
+                
+                // Once it has appeared, stop observing to save memory
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    }, revealOptions);
 
-    document.querySelectorAll(".animate-reveal, .team-grid").forEach((el) => observer.observe(el));
+    // Apply observer to all reveal elements
+    document.querySelectorAll(".animate-reveal, .team-grid, .cards-grid, .grid-layout").forEach((el) => {
+        observer.observe(el);
+    });
 });
     </script>
   </body>

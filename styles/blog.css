@@ -1843,4 +1843,105 @@ p, a, span {
     }
 }
 
+/* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+
+/* --- TABLETS (e.g., iPads, 1024px and below) --- */
+@media (max-width: 1024px) {
+    .part-discovery-container {
+        padding: 0 2rem;
+    }
+
+    .component-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+/* --- MOBILE DEVICES (768px and below) --- */
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    .nav-links {
+        display: none; /* Hide desktop nav */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger icon */
+    }
+
+    /* Hero Section */
+    .discovery-hero {
+        padding: 100px 1rem 60px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin: 1.5rem auto;
+    }
+
+    /* Part Discovery Grid */
+    .component-grid {
+        grid-template-columns: 1fr; /* 1 column for phones */
+        gap: 1rem;
+    }
+
+    .layer-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Search Bar */
+    .search-container {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    /* Modal (Pop-up) Fixes */
+    .modal-content {
+        width: 95%;
+        margin: 10px auto;
+        padding: 1.5rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr; /* Stack footer links */
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+/* --- SMALL PHONES (480px and below) --- */
+@media (max-width: 480px) {
+    .primary-button, .secondary-button {
+        width: 100%; /* Make buttons full width */
+        text-align: center;
+    }
+
+    .part-discovery-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
 

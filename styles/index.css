@@ -2011,3 +2011,106 @@
                 min-width: 100%;
             }
         }
+
+        /* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+
+/* --- TABLETS (1024px and below) --- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    /* Adjust Role Cards to 2 columns */
+    .role-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .infrastructure-grid {
+        grid-template-columns: 1fr; /* Stack side-by-side content */
+        text-align: center;
+    }
+}
+
+/* --- MOBILE DEVICES (768px and below) --- */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-links {
+        display: none; /* Usually replaced by hamburger in JS */
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 100px 1rem 60px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    .hero-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 1rem;
+    }
+
+    /* Role Cards to 1 column */
+    .role-cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* Dashboard/Visual scaling */
+    .dashboard-preview {
+        transform: scale(0.9);
+        margin: 2rem auto;
+        max-width: 100%;
+    }
+
+    /* Statistics/Features stacking */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr; /* 2x2 layout for stats */
+        gap: 1rem;
+    }
+
+    /* Footer stacking */
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* --- SMALL PHONES (480px and below) --- */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .primary-button, .secondary-button {
+        width: 100%; /* Full width for easy tapping */
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr; /* Single column stats */
+    }
+
+    /* Prevent any horizontal overflow */
+    body, html {
+        overflow-x: hidden;
+    }
+}

@@ -23,6 +23,12 @@
 html {
   scroll-behavior: smooth;
 }
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Hard stop for horizontal scrolling */
+  position: relative;
+}
 
 body {
   font-family:
@@ -664,23 +670,37 @@ section {
         padding-bottom: 5vh;
 }
 
-/* Subtle Background Image Layer */
-.about-hero-background {
-   position: absolute;
-        inset: 0;
-        background-image: url("https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg");
-        background-size: auto 100%;
-        background-position: 0 0;
-        background-attachment: fixed;
-        background-repeat: repeat-x;
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 0;
-        animation: gradientShift 15s ease infinite;
+/* UPDATED FASTER ANIMATION */
+@keyframes scrollBackground {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); 
+  }
 }
 
-
-
+.about-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%; /* Keeps the image loop seamless */
+  height: 100%;
+  background-image: url("https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-attachment: scroll !important;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+  
+  /* SPEED CONTROL: Change 30s to 20s for even faster, or 40s to slow down */
+  animation: scrollBackground 30s linear infinite !important;
+  
+  /* Performance boost for Mobile */
+  will-change: transform;
+  backface-visibility: hidden;
+}
 .parallax-layer {
   position: absolute;
         inset: 0;
@@ -1745,5 +1765,142 @@ a {
 @media (min-width: 1440px) {
   .about-hero-content {
     max-width: 90rem;
+  }
+}
+/* ========== FINAL MOBILE STABILITY FIX ========== */
+@media (max-width: 767px) {
+  /* Prevent horizontal scrolling on the whole page */
+  html, body {
+    overflow-x: hidden !important;
+    position: relative;
+    width: 100%;
+  }
+
+  /* Force Hero Content to be visible */
+  .about-hero-content {
+    padding-top: 100px !important;
+    padding-bottom: 50px !important;
+    min-height: auto !important;
+    z-index: 10;
+  }
+
+  /* Keep Font Style but adjust size for phone screens */
+  .about-hero-title {
+    font-size: 2.2rem !important; 
+    word-wrap: break-word;
+  }
+
+  /* Ensure Grid Cards take full width on phones */
+  .cards-grid, .team-grid, .grid-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 5px !important;
+  }
+
+  .feature-card, .team-card, .step-card {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  /* Footer Adjustment */
+  .footer-content {
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center;
+  }
+}
+
+/* =========================================
+   UNIVERSAL RESPONSIVENESS (MOBILE & TABLET)
+   Safe Mode: No design or font style changes
+========================================= */
+
+/* 1. GLOBAL LAYOUT SAFETY */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Hard stop for horizontal scrolling */
+  position: relative;
+}
+
+/* 2. TABLET RESPONSIVENESS (768px to 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Adjust Hero for Tablets */
+  .about-hero-title {
+    font-size: clamp(3rem, 8vw, 5rem) !important; /* Scale font while keeping Nunito 800 style */
+  }
+
+  /* Shift Grids to 2-columns for Tablets */
+  .cards-grid, .team-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem;
+  }
+}
+
+/* 3. MOBILE RESPONSIVENESS (Below 768px) */
+@media (max-width: 767px) {
+  /* Hero Section scaling */
+  .about-hero {
+    padding-top: 100px;
+    min-height: auto;
+  }
+
+  .about-hero-title {
+    font-size: 2.5rem !important;
+    line-height: 1.1;
+  }
+
+  /* Force Grids to single column for readability */
+  .cards-grid, 
+  .team-grid, 
+  .grid-layout, 
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem;
+  }
+
+  /* Full-width buttons for mobile thumbs */
+  .primary-button, 
+  .secondary-button, 
+  .cta-button-large {
+    width: 100% !important;
+    min-width: unset !important;
+  }
+
+  /* Text & Padding Adjustments */
+  .section-header h2 {
+    font-size: 2rem !important;
+  }
+
+  .mission-section, 
+  .team-section, 
+  .join-section {
+    padding: 3rem 0;
+  }
+
+  blockquote {
+    font-size: 1.5rem !important;
+  }
+
+  .blockquote-container {
+    padding: 2rem;
+  }
+}
+
+/* 4. EXTRA SMALL DEVICE FIX (Below 480px) */
+@media (max-width: 480px) {
+  .about-hero-title {
+    font-size: 2.1rem !important;
+  }
+
+  .logo {
+    font-size: 1.2rem;
   }
 }
