@@ -439,8 +439,9 @@
                 display: none;
             }
             .hero-background {
-        background-attachment: scroll;
-        background-size: cover;
+        background-size: 100% auto;
+    animation-duration: 30s;
+    background-size: cover;
     }
         }
 
@@ -461,7 +462,7 @@
             position: absolute;
             inset: 0;
             background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
-            background-size: auto 100%;
+            background-size: auto 75%;
             background-position: 0 0;
             background-attachment: fixed;
             background-repeat: repeat-x;
@@ -1624,7 +1625,8 @@
         font-size: 1.5rem;
     }
     .hero-background {
-        background-attachment: scroll;
-        background-size: cover;
+        background-size: 100% auto;
+    animation-duration: 30s;
+    background-size: cover;
     }
 }

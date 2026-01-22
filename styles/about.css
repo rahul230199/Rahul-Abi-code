@@ -1385,6 +1385,11 @@ blockquote {
   .section-header h2 {
     font-size: 1.75rem;
   }
+  .about-hero-background{
+    background-size: 50% auto;
+    animation-duration: 30s;
+    background-size: cover;
+  }
 }
 
 /* ========== GRID LAYOUTS ========== */

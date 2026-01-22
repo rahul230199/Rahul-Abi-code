@@ -568,7 +568,7 @@
 
     /* Contact Hero */
     .contact-hero {
-        min-height: 80vh;
+        min-height: 50vh;
         padding-top: 90px;
     }
 
@@ -583,7 +583,7 @@
 
     /* Contact Section */
     .contact-details {
-        padding: 3.5rem 0;
+        padding: 2rem 0;
     }
 
     .contact-card {
@@ -808,7 +808,7 @@
 .contact-hero {
   position: relative;
   background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
-  background-size: 200% auto;
+  background-size: 75% auto;
   background-repeat: repeat-x;
   background-position: 0% 50%;
   animation: gradientShift 15s ease infinite;
@@ -819,7 +819,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.75); /* adjust if needed */
+  background: rgba(255, 255, 255, 0.6);  /* adjust if needed */
   z-index: 0;
 }
 .contact-hero > * {
@@ -828,6 +828,7 @@
 }
 @media (max-width: 767px) {
   .contact-hero {
+    background-size: 100% auto;
     animation-duration: 30s;
     background-size: cover;
   }
