@@ -438,6 +438,10 @@
             .menu-toggle {
                 display: none;
             }
+            .hero-background {
+        background-attachment: scroll;
+        background-size: cover;
+    }
         }
 
         /* UPDATED FIRST SECTION WITH ANIMATIONS */
@@ -1618,5 +1622,9 @@
     
     .part-discovery-header h2 {
         font-size: 1.5rem;
+    }
+    .hero-background {
+        background-attachment: scroll;
+        background-size: cover;
     }
 }

@@ -791,3 +791,44 @@
     }
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* =========================================
+   CONTACT HERO – MOVING BACKGROUND IMAGE
+========================================= */
+.contact-hero {
+  position: relative;
+  background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
+  background-size: 200% auto;
+  background-repeat: repeat-x;
+  background-position: 0% 50%;
+  animation: gradientShift 15s ease infinite;
+  overflow: hidden;
+}
+/* Image stays visible behind text */
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75); /* adjust if needed */
+  z-index: 0;
+}
+.contact-hero > * {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .contact-hero {
+    animation-duration: 30s;
+    background-size: cover;
+  }
+}

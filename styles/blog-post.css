@@ -510,6 +510,50 @@
             margin: 0 auto;
             padding: 0 1.5rem;
         }
+        
+        @keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* =========================================
+   MOVING BACKGROUND IMAGE – bg-white
+========================================= */
+.bg-white {
+  position: relative;
+  background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
+  background-size: 200% auto;
+  background-repeat: repeat-x;
+  background-position: 0% 50%;
+  animation: bgMove 10s linear infinite;
+  overflow: hidden;
+}
+
+/* Text readability layer */
+.bg-white::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+}
+
+.bg-white > * {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px) {
+  .bg-white {
+    animation-duration: 10s;
+    background-size: cover;
+  }
+}
+
+
 
         .wide-container {
             max-width: 100rem;

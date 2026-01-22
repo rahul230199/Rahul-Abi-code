@@ -64,6 +64,14 @@
             padding: 0 1.5rem;
         }
 
+        @media (min-width: 481px) and (max-width: 1023px) {
+
+            .hero-background{
+                background-attachment: scroll;
+        background-size: cover;
+            }
+        }
+
         /* ========== SMOOTH ANIMATIONS FROM PART DISCOVERY ========== */
         .animate-reveal {
             opacity: 0;
@@ -533,7 +541,7 @@
 
         /* Subtle Background Image Layer */
         .hero-background {
-            position: absolute;
+           position: absolute;
             inset: 0;
             background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
             background-size: auto 100%;
@@ -545,6 +553,7 @@
             z-index: 0;
             animation: gradientShift 15s ease infinite;
         }
+        
 
         .parallax-layer {
             position: absolute;
@@ -684,6 +693,10 @@
             margin-bottom: 4rem;
             opacity: 0;
             animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+        }
+
+        .access-btn{
+            margin-bottom: 10px;
         }
 
         /* Scroll indicator styles for below buttons */
@@ -2009,6 +2022,11 @@
             .primary-button,
             .secondary-button {
                 min-width: 100%;
+            }
+
+            .hero-background{
+                 background-attachment: scroll;
+        background-size: cover;
             }
         }
 

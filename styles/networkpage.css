@@ -1225,6 +1225,11 @@
             .section-header h2 {
                 font-size: 1.75rem;
             }
+
+            .hero-background{
+                background-attachment: scroll;
+        background-size: cover;
+            }
         }
         /* ============================================================
    RESPONSIVE DESIGN (Tablets & Mobile)
@@ -1243,6 +1248,10 @@
 
     .hero-title {
         font-size: 3rem;
+    }
+    .hero-background{
+        background-attachment: scroll;
+        background-size: cover;
     }
 }
 
@@ -1304,6 +1313,10 @@
 
     .social-links {
         justify-content: center;
+    }
+    .hero-background{
+        background-attachment: scroll;
+        background-size: cover;
     }
 }
 

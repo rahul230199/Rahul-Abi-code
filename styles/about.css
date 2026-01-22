@@ -656,7 +656,7 @@ section {
 .about-hero-content {
    position: relative;
         z-index: 20;
-        max-width: 90rem;
+        max-width: 70rem;
         margin: 0 auto;
         padding: 0 1.5rem;
         text-align: center;
@@ -670,45 +670,30 @@ section {
         padding-bottom: 5vh;
 }
 
-/* UPDATED FASTER ANIMATION */
-@keyframes scrollBackground {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%); 
-  }
-}
+
 
 .about-hero-background {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 400%; /* Keeps the image loop seamless */
-  height: 100%;
-  background-image: url("https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg");
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-attachment: scroll !important;
-  opacity: 0.15;
-  z-index: 0;
-  pointer-events: none;
-  
-  /* SPEED CONTROL: Change 30s to 20s for even faster, or 40s to slow down */
-  animation: scrollBackground 30s linear infinite !important;
-  
-  /* Performance boost for Mobile */
-  will-change: transform;
-  backface-visibility: hidden;
+            inset: 0;
+            background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
+            background-size: auto 100%;
+            background-position: 0 0;
+            background-attachment: fixed;
+            background-repeat: repeat-x;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: gradientShift 10s ease infinite;
 }
 .parallax-layer {
-  position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 10;
-}
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
 
 .hero-circle-1 {
   position: absolute;
@@ -1485,11 +1470,7 @@ blockquote {
     padding-top: 70px;
   }
 
-  .about-hero-background {
-   background-attachment: scroll;
-          background-size: cover;
-          background-position: center;
-  }
+ 
 }
 
 /* Clamp animated circles to viewport */
@@ -1594,10 +1575,7 @@ blockquote {
     min-height: 85vh;
   }
 
-  .about-hero-background {
-    background-attachment: scroll;
-    background-size: cover;
-  }
+  
 
   .hero-circle-1 {
     width: 300px;
@@ -1706,11 +1684,7 @@ footer {
 ------------------------------ */
 @media (max-width: 1023px) {
   /* Kill fixed background issues on mobile */
-  .about-hero-background {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center !important;
-  }
+  
 
   /* Disable large animated shapes */
   .hero-circle-1,
@@ -1764,7 +1738,7 @@ a {
 ------------------------------ */
 @media (min-width: 1440px) {
   .about-hero-content {
-    max-width: 90rem;
+    max-width: 70rem;
   }
 }
 /* ========== FINAL MOBILE STABILITY FIX ========== */
@@ -1778,7 +1752,7 @@ a {
 
   /* Force Hero Content to be visible */
   .about-hero-content {
-    padding-top: 100px !important;
+    padding-top: 20px !important;
     padding-bottom: 50px !important;
     min-height: auto !important;
     z-index: 10;

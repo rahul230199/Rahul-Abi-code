@@ -663,16 +663,16 @@
       /* Subtle Background Image Layer */
       .careers-hero-background {
         position: absolute;
-        inset: 0;
-        background-image: url("https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg");
-        background-size: auto 100%;
-        background-position: 0 0;
-        background-attachment: fixed;
-        background-repeat: repeat-x;
-        opacity: 0.15;
-        pointer-events: none;
-        z-index: 0;
-        animation: gradientShift 15s ease infinite;
+            inset: 0;
+            background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
+            background-size: auto 100%;
+            background-position: 0 0;
+            background-attachment: fixed;
+            background-repeat: repeat-x;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: gradientShift 15s ease infinite;
       }
 
       .parallax-layer {
@@ -1547,9 +1547,10 @@
       /* Kill background-attachment issues on mobile */
       @media (max-width: 1023px) {
         .careers-hero-background {
-          background-attachment: scroll;
-          background-size: cover;
-          background-position: center;
+          
+        background-attachment: scroll;
+        background-size: cover;
+
         }
       }
 
@@ -1753,6 +1754,15 @@
     .primary-button, .secondary-button, .cta-button {
         width: 100%; /* Full width buttons for easier tapping */
         text-align: center;
+    }
+    .blog-hero-background {
+        background-attachment: scroll;
+        background-size: cover;
+    }
+
+    .careers-hero-content{
+      margin-top: 10px;
+      padding-top: 0;
     }
 
     .hero-title {
