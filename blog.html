@@ -7,7 +7,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="icon" href="assests/1000055723.jpg" type="image/png">
-   <link href="../Rahul-Abi-code/styles/blog.css" rel="stylesheet"/>
+    <link href="/styles/blog.css" rel="stylesheet"/>
+    <style>
+        /* ========== FIX FOR HERO SECTION CONTAINMENT ========== */
+        .blog-hero-inner {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 20;
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -72,32 +98,35 @@
             </svg>
         </div>
 
-        <div class="blog-hero-content">
-            <div class="animate-reveal">
-                <h1 class="blog-hero-title">
-                    <span style="display: block;">Insights from the</span>
-                    <span style="display: block; color: var(--primary);">Operating Layer</span>
-                </h1>
-            </div>
+        <!-- FIX: Added blog-hero-inner wrapper -->
+        <div class="blog-hero-inner">
+            <div class="blog-hero-content">
+                <div class="animate-reveal">
+                    <h1 class="blog-hero-title">
+                        <span style="display: block;">Insights from the</span>
+                        <span style="display: block; color: var(--primary);">Operating Layer</span>
+                    </h1>
+                </div>
 
-            <div class="animate-reveal" style="transition-delay: 200ms">
-                <p class="blog-hero-subtitle">
-                    Thoughtful perspectives on EV manufacturing, execution, policy, and scale.
-                </p>
-            </div>
+                <div class="animate-reveal" style="transition-delay: 200ms">
+                    <p class="blog-hero-subtitle">
+                        Thoughtful perspectives on EV manufacturing, execution, policy, and scale.
+                    </p>
+                </div>
 
-            <div class="animate-reveal" style="transition-delay: 400ms">
-                <div style="display: flex; justify-content: center;">
-                    <a href="#blog-posts" class="cta-button-large" >
-                        <span>Read Articles <i class="fas fa-arrow-right"></i></span>
-                    </a>
+                <div class="animate-reveal" style="transition-delay: 400ms">
+                    <div style="display: flex; justify-content: center;">
+                        <a href="#blog-posts" class="cta-button-large" >
+                            <span>Read Articles <i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========== BLOG POSTS SECTION ========== -->
-    <section id="blog-posts" class="blog-posts-section" >
+    <section id="blog-posts" class="blog-posts-section">
         <div class="section-container">
             <!-- Featured Post -->
             <div class="featured-post animate-reveal">
@@ -133,7 +162,7 @@
                         <div class="featured-image">
                             <div class="image-placeholder">
                                 <div class="placeholder-icon">
-                                    📰
+                                    ??
                                 </div>
                                 <p class="placeholder-text">Featured Article</p>
                             </div>
@@ -143,7 +172,7 @@
             </div>
 
             <!-- Blog Posts Grid -->
-            <div>
+            <div class="latest-articles">
                 <div class="animate-reveal" style="margin-bottom: 4rem;">
                     <h2 class="section-title">Latest Articles</h2>
                 </div>
@@ -220,7 +249,7 @@
     </section>
 
     <!-- ========== NEWSLETTER SECTION ========== -->
-    <section class="newsletter-section" style="padding-bottom: 20px;">
+    <section class="newsletter-section">
         <div class="newsletter-container">
             <div class="animate-reveal">
                 <div class="newsletter-card">
@@ -296,122 +325,124 @@
         </div>
     </footer>
 
-<script>
-  const yearElement = document.getElementById("currentYear");
-   document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.getElementById('menuToggle');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const header = document.getElementById('mainHeader');
-    const progressBar = document.getElementById('progressBar');
-    const parallaxLayer = document.getElementById('parallaxLayer');
-  
-    let lastScrollTop = 0;
-
-    // 1. UNIFIED SCROLL SYSTEM (Progress, Header, Parallax)
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    <script>
+        const yearElement = document.getElementById("currentYear");
         
-        // Progress Bar
-        const scrolled = (scrollTop / height) * 100;
-        if (progressBar) progressBar.style.width = scrolled + '%';
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menuToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const header = document.getElementById('mainHeader');
+            const progressBar = document.getElementById('progressBar');
+            const parallaxLayer = document.getElementById('parallaxLayer');
+          
+            let lastScrollTop = 0;
 
-        // Header Effects
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        // Hide/Show Header on scroll direction
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-        lastScrollTop = scrollTop;
-
-        // Hero Parallax (Desktop Only)
-        if (window.innerWidth >= 1024 && parallaxLayer) {
-            parallaxLayer.style.transform = `translateY(${scrollTop * 0.4}px)`;
-        }
-    }, { passive: true });
-
-    // 2. MOBILE MENU LOGIC
-    if (menuToggle && dropdownMenu) {
-        menuToggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            const isOpen = dropdownMenu.classList.toggle('active');
-            document.body.classList.toggle('menu-open', isOpen);
-            
-            // Toggle Icon Class
-            const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars', !isOpen);
-            icon.classList.toggle('fa-times', isOpen);
-        });
-
-        // Close menu when clicking a link or clicking outside
-        document.addEventListener('click', function (e) {
-            if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                dropdownMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-                menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            }
-        });
-    }
-
-    // 3. ANIMATION OBSERVER
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
+            // 1. UNIFIED SCROLL SYSTEM (Progress, Header, Parallax)
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 
-                // Stagger child cards if the grid becomes visible
-                if (entry.target.classList.contains('articles-grid')) {
-                    entry.target.querySelectorAll('.article-card').forEach((card, i) => {
-                        card.style.transitionDelay = `${i * 0.1}s`;
-                    });
+                // Progress Bar
+                const scrolled = (scrollTop / height) * 100;
+                if (progressBar) progressBar.style.width = scrolled + '%';
+
+                // Header Effects
+                if (scrollTop > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
                 }
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+                // Hide/Show Header on scroll direction
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                }
+                lastScrollTop = scrollTop;
 
-    // 4. NEWSLETTER & HOVER FIXES
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('.newsletter-input').value;
-            if (email) {
-                const subject = encodeURIComponent("Newsletter Subscription");
-                const body = encodeURIComponent(`New subscriber: ${email}`);
-                window.location.href = `mailto:auroxorigin@gmail.com?subject=${subject}&body=${body}`;
-                alert('Success! Opening your email client to confirm.');
-            }
-        });
-    }
+                // Hero Parallax (Desktop Only)
+                if (window.innerWidth >= 1024 && parallaxLayer) {
+                    parallaxLayer.style.transform = `translateY(${scrollTop * 0.4}px)`;
+                }
+            }, { passive: true });
 
-    if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
-        }
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            e.preventDefault();
-            const target = document.querySelector(targetId);
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
+            // 2. MOBILE MENU LOGIC
+            if (menuToggle && dropdownMenu) {
+                menuToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const isOpen = dropdownMenu.classList.toggle('active');
+                    document.body.classList.toggle('menu-open', isOpen);
+                    
+                    // Toggle Icon Class
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.toggle('fa-bars', !isOpen);
+                    icon.classList.toggle('fa-times', isOpen);
+                });
+
+                // Close menu when clicking a link or clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                        dropdownMenu.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                        menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    }
                 });
             }
+
+            // 3. ANIMATION OBSERVER
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Stagger child cards if the grid becomes visible
+                        if (entry.target.classList.contains('articles-grid')) {
+                            entry.target.querySelectorAll('.article-card').forEach((card, i) => {
+                                card.style.transitionDelay = `${i * 0.1}s`;
+                            });
+                        }
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.animate-reveal').forEach(el => observer.observe(el));
+
+            // 4. NEWSLETTER & HOVER FIXES
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('.newsletter-input').value;
+                    if (email) {
+                        const subject = encodeURIComponent("Newsletter Subscription");
+                        const body = encodeURIComponent(`New subscriber: ${email}`);
+                        window.location.href = `mailto:auroxorigin@gmail.com?subject=${subject}&body=${body}`;
+                        alert('Success! Opening your email client to confirm.');
+                    }
+                });
+            }
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 </body>
 </html>

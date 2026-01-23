@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="assests/1000055723.jpg" type="image/png" />
-    <link href="../Rahul-Abi-code/styles/about.css" rel="stylesheet" />
+    <link href="/styles/about.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Progress Bar -->
@@ -147,7 +147,7 @@
     </section>
 
     <!-- ========== SECTION 2: MISSION & VISION ========== -->
-    <section id="mission" class="mission-section" style="padding-top: 30px;padding-bottom: 30px;">
+    <section id="mission" class="mission-section">
       <!-- Blueprint Grid -->
       <svg class="blueprint-grid" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -193,8 +193,8 @@
       </div>
     </section>
 
-    <!-- ========== SECTION 3: TEAM ========== -->
-    <section class="team-section">
+    <!-- ========== SECTION 3: UPDATED TEAM SECTION ========== -->
+    <section class="team-section-updated">
       <div class="container">
         <div class="section-header animate-reveal">
           <h2>Our Leadership Team</h2>
@@ -203,42 +203,62 @@
           </p>
         </div>
 
-        <div class="team-grid">
-          <div class="team-card animate-reveal">
-            <div class="team-member-image"></div>
-            <h3>Prasanna Bhanuprakash</h3>
-            <span class="team-role">Founder & CEO</span>
-            <p>
-              Leading the vision for a structured EV manufacturing future in
-              India.
-            </p>
+        <div class="team-grid-updated">
+          <div class="team-card-updated animate-reveal">
+            <div class="team-member-image-updated"></div>
+            <div class="team-card-content">
+              <h3>Prasanna Bhanuprakash</h3>
+              <span class="team-role-updated">Founder & CEO</span>
+              <p>
+                Leading the vision for a structured EV manufacturing future in
+                India.
+              </p>
+            </div>
           </div>
 
-          <div class="team-card animate-reveal" style="transition-delay: 100ms">
-            <div class="team-member-image"></div>
-            <h3>Rahul Venkat</h3>
-            <span class="team-role">CTO</span>
-            <p>
-              Architecting the invisible infrastructure for digital
-              coordination.
-            </p>
+          <div class="team-card-updated animate-reveal" style="transition-delay: 100ms">
+            <div class="team-member-image-updated"></div>
+            <div class="team-card-content">
+              <h3>Rahul Venkat</h3>
+              <span class="team-role-updated">CTO</span>
+              <p>
+                Architecting the invisible infrastructure for digital
+                coordination.
+              </p>
+            </div>
           </div>
 
-          <div class="team-card animate-reveal" style="transition-delay: 200ms">
-            <div class="team-member-image"></div>
-            <h3>Vishwanath V</h3>
-            <span class="team-role">VP, Operations</span>
-            <p>Ensuring every workflow moves from intent to delivery.</p>
+          <div class="team-card-updated animate-reveal" style="transition-delay: 200ms">
+            <div class="team-member-image-updated"></div>
+            <div class="team-card-content">
+              <h3>Vishwanath V</h3>
+              <span class="team-role-updated">VP, Operations</span>
+              <p>Ensuring every workflow moves from intent to delivery.</p>
+            </div>
           </div>
 
-          <div class="team-card animate-reveal" style="transition-delay: 300ms">
-            <div class="team-member-image"></div>
-            <h3>Sebin Sunny M</h3>
-            <span class="team-role">VP, Sales and Revenue Generation</span>
-            <p>
-              Building trusted relationships that convert structured execution
-              into sustainable growth.
-            </p>
+          <div class="team-card-updated animate-reveal" style="transition-delay: 300ms">
+            <div class="team-member-image-updated"></div>
+            <div class="team-card-content">
+              <h3>Sebin Sunny M</h3>
+              <span class="team-role-updated">VP, Sales and Revenue Generation</span>
+              <p>
+                Building trusted relationships that convert structured execution
+                into sustainable growth.
+              </p>
+            </div>
+          </div>
+
+          <!-- Added 5th Team Member -->
+          <div class="team-card-updated animate-reveal" style="transition-delay: 400ms">
+            <div class="team-member-image-updated"></div>
+            <div class="team-card-content">
+              <h3>Rangaraju R</h3>
+              <span class="team-role-updated">VP, Engineering</span>
+              <p>
+                Translating system architecture into reliable, scalable engineering execution.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -260,7 +280,7 @@
           <div class="animate-reveal" style="transition-delay: 200ms">
             <div class="blockquote-container">
               <blockquote>
-                "We architect systems that stay in the background quiet,
+                "We architect systems that stay in the background-quiet,
                 dependable, and precise."
               </blockquote>
             </div>
@@ -269,35 +289,19 @@
       </div>
     </section>
 
-    <!-- ========== SECTION 5: JOIN US ========== -->
-    <section class="join-section">
+    <!-- ========== SECTION 5: UPDATED JOIN US SECTION ========== -->
+    <section class="join-section-updated">
       <div class="container">
         <div class="animate-reveal">
-          <div class="join-container">
+          <div class="join-container-updated">
             <h2 style="text-align: center">Join Us in Building the Future</h2>
-            <p
-              style="
-                text-align: center;
-                font-size: 1.125rem;
-                color: var(--dark-grey);
-                max-width: 48rem;
-                margin: 0 auto 2.5rem;
-                line-height: 1.6;
-              "
-            >
+            <p class="join-description">
               Whether you're a supplier, OEM, or financial partner, AXO Networks
               is building the infrastructure that will power India's EV
               ecosystem.
             </p>
 
-            <div
-              style="
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-                flex-wrap: wrap;
-              "
-            >
+            <div class="join-buttons">
               <a href="/network-access" class="primary-button">
                 <span>Join Us <i class="fas fa-arrow-right"></i></span>
               </a>
@@ -448,8 +452,10 @@
                 entry.target.classList.add("is-visible");
                 
                 // Stagger Logic for Grids (Team/Cards)
-                const isGrid = entry.target.classList.contains("team-grid") || 
-                             entry.target.classList.contains("cards-grid");
+                const isGrid = entry.target.classList.contains("team-grid-updated") || 
+                             entry.target.classList.contains("team-grid") || 
+                             entry.target.classList.contains("cards-grid") || 
+                             entry.target.classList.contains("grid-layout");
                 
                 if (isGrid) {
                     const children = entry.target.children;
@@ -465,7 +471,7 @@
     }, revealOptions);
 
     // Apply observer to all reveal elements
-    document.querySelectorAll(".animate-reveal, .team-grid, .cards-grid, .grid-layout").forEach((el) => {
+    document.querySelectorAll(".animate-reveal, .team-grid-updated, .team-grid, .cards-grid, .grid-layout").forEach((el) => {
         observer.observe(el);
     });
 });
