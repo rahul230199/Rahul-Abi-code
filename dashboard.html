@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXO Networks - Form Submissions Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ... (Your existing root and base styles) ... */
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #3B82F6;
+            --primary-dark: #1E40AF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --foreground: #111827;
+            --background: #FFFFFF;
+            --light-grey: #F9FAFB;
+            --grey: #E5E7EB;
+            --dark-grey: #6B7280;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--light-grey);
+            color: var(--foreground);
+        }
+
+        .container { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+        /* --- Header & Hamburger --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--grey);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); }
+
+        .nav-controls { display: flex; align-items: center; gap: 1.5rem; }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* --- Stats & Table --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--grey);
+            text-align: center;
+        }
+
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+
+        .card { background: white; border-radius: 12px; border: 1px solid var(--grey); overflow: hidden; }
+        .table-container { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { background: var(--light-grey); padding: 1rem; text-align: left; font-size: 0.85rem; }
+        .data-table td { padding: 1rem; border-top: 1px solid var(--grey); font-size: 0.9rem; }
+
+        /* --- Badges & Buttons --- */
+        .status-badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .status-PENDING { background: #fef3c7; color: #92400e; }
+        .status-APPROVED { background: #d1fae5; color: #065f46; }
+        .status-REJECTED { background: #fee2e2; color: #991b1b; }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+
+        /* --- Modal --- */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: white;
+            max-width: 700px;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-menu {
+                display: none; /* Hide by default on mobile */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 2px solid var(--primary);
+            }
+            .nav-menu.active { display: flex; }
+            .user-info { flex-direction: row-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">AXO <span style="color: var(--foreground-light)">NETWORKS</span></div>
+        
+        <div class="nav-controls">
+            <div id="userSection" class="nav-menu">
+                <div class="user-info" style="display: flex; align-items: center; gap: 10px; margin-right: 15px;">
+                    <div class="user-details" style="text-align: right;">
+                        <div class="user-name" id="userName" style="font-weight: 700; font-size: 0.9rem;">Admin</div>
+                        <div class="user-role" id="userRole" style="font-size: 0.7rem; color: var(--dark-grey);">Administrator</div>
+                    </div>
+                    <div class="user-avatar" id="userAvatar" style="width: 35px; height: 35px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">A</div>
+                </div>
+                <button class="btn" onclick="logout()" style="background: #fee2e2; color: #dc2626;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total</div>
+                <div class="stat-value" id="totalSubmissions">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value" style="color: var(--warning)" id="pendingCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Approved</div>
+                <div class="stat-value" style="color: var(--success)" id="approvedCount">0</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="position: absolute; right: 20px; cursor: pointer; font-size: 1.5rem;">&times;</span>
+            <h2 id="modalTitle">Company Details</h2>
+            <hr style="margin: 1rem 0; opacity: 0.2;">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const yearElement = document.getElementById("currentYear");
+        // --- Navigation Logic ---
+        function toggleMenu() {
+            
+            const nav = document.getElementById('userSection');
+            nav.classList.toggle('active');
+        }
+
+        // --- Mock Data (Replace with your API fetch) ---
+        let submissions = [
+            { _id: '1', companyName: 'EcoDrive Motors', contactName: 'John Doe', status: 'PENDING', submittedAt: '2023-10-01' },
+            { _id: '2', companyName: 'VoltSystems', contactName: 'Jane Smith', status: 'APPROVED', submittedAt: '2023-09-28' }
+        ];
+
+        function renderTable() {
+            const tbody = document.getElementById('submissionsBody');
+            tbody.innerHTML = submissions.map(s => `
+                <tr>
+                    <td><strong>${s.companyName}</strong></td>
+                    <td>${s.contactName}</td>
+                    <td><span class="status-badge status-${s.status}">${s.status}</span></td>
+                    <td>${s.submittedAt}</td>
+                    <td><button class="btn btn-view" onclick="viewDetails('${s._id}')">View</button></td>
+                </tr>
+            `).join('');
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('totalSubmissions').innerText = submissions.length;
+            document.getElementById('pendingCount').innerText = submissions.filter(s => s.status === 'PENDING').length;
+            document.getElementById('approvedCount').innerText = submissions.filter(s => s.status === 'APPROVED').length;
+        }
+        
+    if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        function viewDetails(id) {
+            const data = submissions.find(s => s._id === id);
+            document.getElementById('modalBody').innerHTML = `
+                <p><strong>Company:</strong> ${data.companyName}</p>
+                <p><strong>Contact:</strong> ${data.contactName}</p>
+                <div style="margin-top: 20px;">
+                    <button class="btn" style="background: var(--success); color: white;" onclick="updateStatus('${id}', 'APPROVED')">Approve</button>
+                    <button class="btn" style="background: var(--danger); color: white;" onclick="updateStatus('${id}', 'REJECTED')">Reject</button>
+                </div>
+            `;
+            document.getElementById('detailModal').style.display = 'flex';
+        }
+
+        function updateStatus(id, newStatus) {
+            const index = submissions.findIndex(s => s._id === id);
+            if (index !== -1) {
+                submissions[index].status = newStatus;
+                renderTable();
+                closeModal();
+                alert(`Status updated to ${newStatus}`);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        function logout() {
+            if(confirm("Logout?")) window.location.href = "/login";
+        }
+
+        // Initialize
+        renderTable();
+    </script>
+</body>
+</html>
