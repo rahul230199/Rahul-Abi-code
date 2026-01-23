@@ -1,4 +1,4 @@
- /* ========== EXACT STYLES FROM NETWORK ACCESS PAGE ========== */
+/* ========== EXACT STYLES FROM NETWORK ACCESS PAGE ========== */
         * {
             margin: 0;
             padding: 0;
@@ -524,13 +524,21 @@
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             padding-top: 80px;
             overflow: hidden;
+        }
+
+        /* FIX: Add hero inner container to properly center content */
+        .blog-hero-inner {
+            position: relative;
+            z-index: 20;
+            width: 100%;
+            min-height: calc(100vh - 80px);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* Center content properly */
-        .blog-hero-title {
+        .blog-hero-content {
             position: relative;
             z-index: 20;
             max-width: 90rem;
@@ -538,13 +546,6 @@
             padding: 0 1.5rem;
             text-align: center;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-           /*min-height: calc(100vh - 80px);*/
-            padding-top: 5vh;
-            padding-bottom: 5vh;
         }
 
         /* Subtle Background Image Layer */
@@ -628,16 +629,6 @@
             width: 100%;
             height: 100%;
             opacity: 0.1;
-        }
-
-        .blog-hero-content {
-            position: relative;
-            z-index: 20;
-            max-width: 90rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            text-align: center;
-            width: 100%;
         }
 
         .blog-hero-title {
@@ -1383,7 +1374,7 @@
         }
 
         .footer a::before {
-            content: '→';
+            content: '?';
             position: absolute;
             left: -20px;
             opacity: 0;
@@ -1717,7 +1708,7 @@ canvas {
 ============================ */
 @media (max-width: 1023px) {
     .dropdown-menu {
-        position: fixed;               /* 🔑 KEY FIX */
+        position: fixed;               /* ?? KEY FIX */
         top: 72px;                     /* header height */
         right: 1rem;
         left: 1rem;
@@ -1725,8 +1716,8 @@ canvas {
         width: auto;
         max-width: 360px;
 
-        overflow: visible;             /* 🔑 kill scrollbar */
-        max-height: none;              /* 🔑 kill constraint */
+        overflow: visible;             /* ?? kill scrollbar */
+        max-height: none;              /* ?? kill constraint */
 
         z-index: 3000;
     }
@@ -1818,7 +1809,7 @@ p, a, span {
 
     /* Detach dropdown from header layout */
     .dropdown-menu {
-        position: fixed !important;     /* 🔑 CRITICAL */
+        position: fixed !important;     /* ?? CRITICAL */
         top: 72px;                      /* below header */
         left: 1rem;
         right: 1rem;
@@ -1952,4 +1943,28 @@ p, a, span {
     }
 }
 
+/* ========== FIX FOR HERO SECTION CONTAINMENT ========== */
+/* Add this at the end to fix the hero section issue */
+.blog-hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding-top: 80px;
+    overflow: hidden;
+}
 
+.blog-hero-content {
+    position: relative;
+    z-index: 20;
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+}

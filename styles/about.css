@@ -637,63 +637,53 @@ section {
 .about-hero {
   position: relative;
   min-height: 100vh;
-
   width: 100%;
-
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-
   padding-top: 80px;
-
   overflow: hidden;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 }
 
 .about-hero-content {
    position: relative;
-        z-index: 20;
-        max-width: 70rem;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        text-align: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-       /* min-height: calc(100vh - 80px);*/
-        padding-top: 5vh;
-        padding-bottom: 5vh;
+   z-index: 20;
+   max-width: 70rem;
+   margin: 0 auto;
+   padding: 0 1.5rem;
+   text-align: center;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-top: 5vh;
+   padding-bottom: 5vh;
 }
-
-
 
 .about-hero-background {
   position: absolute;
-            inset: 0;
-            background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
-            background-size: auto 100%;
-            background-position: 0 0;
-            background-attachment: fixed;
-            background-repeat: repeat-x;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-            animation: gradientShift 10s ease infinite;
+  inset: 0;
+  background-image: url('https://static.wixstatic.com/media/3d4c2a_2f337be5b7da445db58a7946af6d1fe4~mv2.jpg');
+  background-size: auto 100%;
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-repeat: repeat-x;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  animation: gradientShift 10s ease infinite;
 }
-.parallax-layer {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
 
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
 
 .hero-circle-1 {
   position: absolute;
@@ -945,6 +935,9 @@ section {
   padding: 8rem 0;
   background-color: white;
   position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
 }
 
 .join-section {
@@ -1385,11 +1378,6 @@ blockquote {
   .section-header h2 {
     font-size: 1.75rem;
   }
-  .about-hero-background{
-    background-size: 50% auto;
-    animation-duration: 30s;
-    background-size: cover;
-  }
 }
 
 /* ========== GRID LAYOUTS ========== */
@@ -1474,8 +1462,6 @@ blockquote {
   .about-hero {
     padding-top: 70px;
   }
-
- 
 }
 
 /* Clamp animated circles to viewport */
@@ -1487,8 +1473,8 @@ blockquote {
   max-height: 100vh;
   pointer-events: none;
 }
-/* Disable circles completely on small devices */
 
+/* Disable circles completely on small devices */
 @media (max-width: 768px) {
   .hero-circle-1,
   .hero-circle-2,
@@ -1580,8 +1566,6 @@ blockquote {
     min-height: 85vh;
   }
 
-  
-
   .hero-circle-1 {
     width: 300px;
     height: 300px;
@@ -1621,6 +1605,7 @@ blockquote {
     gap: 2rem;
   }
 }
+
 /* =========================================
    FINAL MOBILE RESPONSIVENESS HARD FIX
    (SAFE – NO CLASS / ID CHANGES)
@@ -1688,9 +1673,6 @@ footer {
    HERO + BACKGROUND FIXES
 ------------------------------ */
 @media (max-width: 1023px) {
-  /* Kill fixed background issues on mobile */
-  
-
   /* Disable large animated shapes */
   .hero-circle-1,
   .hero-circle-2,
@@ -1746,6 +1728,7 @@ a {
     max-width: 70rem;
   }
 }
+
 /* ========== FINAL MOBILE STABILITY FIX ========== */
 @media (max-width: 767px) {
   /* Prevent horizontal scrolling on the whole page */
@@ -1881,5 +1864,348 @@ html, body {
 
   .logo {
     font-size: 1.2rem;
+  }
+}
+
+/* ========== UPDATED TEAM SECTION ========== */
+.team-section-updated {
+  padding: 8rem 0;
+  background-color: white;
+  position: relative;
+}
+
+.team-grid-updated {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .team-grid-updated {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .team-grid-updated {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-grid-updated {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .team-grid-updated {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-card-updated {
+  background: white;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 2px solid var(--grey);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.team-card-updated:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.team-card-updated::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--primary) 0%,
+    var(--primary-light) 100%
+  );
+  transform: scaleY(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top;
+}
+
+.team-card-updated:hover::before {
+  transform: scaleY(1);
+}
+
+.team-member-image-updated {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-member-image-updated::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 50%, rgba(30, 58, 138, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.team-card-updated:hover .team-member-image-updated::after {
+  opacity: 1;
+}
+
+.team-card-content {
+  padding: 0;
+}
+
+.team-card-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+  line-height: 1.3;
+}
+
+.team-role-updated {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  line-height: 1.4;
+}
+
+.team-card-content p {
+  color: var(--dark-grey);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ========== EXPANDED PHILOSOPHY SECTION ========== */
+.philosophy-section-expanded {
+  padding: 8rem 0;
+  background-color: white;
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+}
+
+.philosophy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.philosophy-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.philosophy-content h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, var(--foreground) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.philosophy-content .text-lg {
+  font-size: 1.25rem;
+  color: var(--dark-grey);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.philosophy-quote {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 58, 138, 0.05) 0%,
+    rgba(30, 58, 138, 0.1) 100%
+  );
+  padding: 3rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(30, 58, 138, 0.1);
+  margin-top: 2rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.philosophy-quote:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(30, 58, 138, 0.1);
+}
+
+.philosophy-quote blockquote {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.3;
+  font-style: italic;
+  position: relative;
+  margin: 0;
+}
+
+.philosophy-quote blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  font-size: 4rem;
+  color: rgba(30, 58, 138, 0.1);
+  font-family: serif;
+  line-height: 1;
+}
+
+/* ========== UPDATED JOIN SECTION ========== */
+.join-section-updated {
+  padding: 6rem 0;
+  background-color: var(--light-grey);
+  position: relative;
+}
+
+.join-container-updated {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--grey);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.join-container-updated:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-light);
+}
+
+.join-container-updated h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--foreground) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (min-width: 768px) {
+  .join-container-updated h2 {
+    font-size: 2.75rem;
+  }
+}
+
+.join-description {
+  font-size: 1.125rem;
+  color: var(--dark-grey);
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.join-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive styles for updated sections */
+@media (max-width: 768px) {
+  .team-card-updated {
+    padding: 1.5rem;
+  }
+  
+  .team-card-content h3 {
+    font-size: 1.125rem;
+  }
+  
+  .philosophy-section-expanded {
+    padding: 6rem 0;
+  }
+  
+  .philosophy-content h2 {
+    font-size: 2.25rem;
+  }
+  
+  .philosophy-content .text-lg {
+    font-size: 1.125rem;
+  }
+  
+  .philosophy-quote {
+    padding: 2rem;
+  }
+  
+  .philosophy-quote blockquote {
+    font-size: 1.5rem;
+  }
+  
+  .join-container-updated {
+    padding: 2rem 1.5rem;
+  }
+  
+  .join-container-updated h2 {
+    font-size: 1.75rem;
+  }
+  
+  .join-description {
+    font-size: 1rem;
+  }
+  
+  .join-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .join-buttons .primary-button,
+  .join-buttons .secondary-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-section-updated {
+    padding: 4rem 0;
+  }
+  
+  .join-section-updated {
+    padding: 4rem 0;
+  }
+  
+  .team-card-updated {
+    padding: 1.25rem;
+  }
+  
+  .philosophy-section-expanded {
+    padding: 4rem 0;
+  }
+  
+  .philosophy-content h2 {
+    font-size: 1.75rem;
+  }
+  
+  .philosophy-quote blockquote {
+    font-size: 1.25rem;
   }
 }
