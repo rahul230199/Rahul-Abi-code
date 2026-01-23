@@ -1968,3 +1968,37 @@ p, a, span {
     align-items: center;
     min-height: calc(100vh - 80px);
 }
+
+/* =========================================
+   MOBILE DROPDOWN SIZE FIX
+========================================= */
+@media (max-width: 767px) {
+
+  .dropdown-menu {
+    position: absolute;        /* keep same behavior */
+    top: 100%;
+    right: 1rem;
+    left: auto;
+
+    width: 85vw;               /* NOT full screen */
+    max-width: 320px;          /* small dropdown */
+    max-height: 60vh;          /* prevent full page */
+
+    overflow-y: auto;          /* scroll inside */
+    border-radius: 12px;
+  }
+
+  .dropdown-item {
+    padding: 0.75rem 1rem;     /* tighter spacing */
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 767px) {
+  .dropdown-menu {
+    margin-top: 0.5rem;
+  }
+}
+/* Hamburger open state */
+.menu-toggle.is-active {
+  transform: rotate(90deg); /* or whatever horizontal style you want */
+}

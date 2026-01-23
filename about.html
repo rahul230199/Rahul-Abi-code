@@ -412,30 +412,34 @@
             // Stop event from bubbling to document (which would close it instantly)
             e.stopPropagation();
             
-            // Toggle the menu
-            const isActive = dropdownMenu.classList.toggle("active");
-            
-            // Optional: Prevent background scrolling when menu is open
-            if (isActive) {
-                document.body.style.overflow = "hidden";
-            } else {
-                document.body.style.overflow = "";
-            }
+           const isActive = dropdownMenu.classList.toggle("active");
+menuToggle.classList.toggle("is-active", isActive);
+
+if (isActive) {
+  document.body.style.overflow = "hidden";
+} else {
+  document.body.style.overflow = "";
+}
+
         });
 
         // Close menu when clicking anywhere outside
         document.addEventListener("click", function (e) {
             if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                dropdownMenu.classList.remove("active");
-                document.body.style.overflow = "";
+              dropdownMenu.classList.remove("active");
+menuToggle.classList.remove("is-active");
+document.body.style.overflow = "";
+
             }
         });
         
         // Auto-close menu if user resizes window to desktop size
         window.addEventListener("resize", () => {
             if (window.innerWidth >= 1024) {
-                dropdownMenu.classList.remove("active");
-                document.body.style.overflow = "";
+               dropdownMenu.classList.remove("active");
+menuToggle.classList.remove("is-active");
+document.body.style.overflow = "";
+
             }
         });
     }
