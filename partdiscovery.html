@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
     <link rel="icon" href="assests/1000055723.jpg" type="image/png">
-   <link href="./styles/partdiscovery.css" rel="stylesheet" />
+   <link href="../styles/partdiscovery.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -741,39 +741,64 @@
         // Mobile menu toggle with animation
         const menuToggle = document.getElementById('menuToggle');
         const dropdownMenu = document.getElementById('dropdownMenu');
-        if (menuToggle && dropdownMenu) {
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('active');
-                menuToggle.style.transform = dropdownMenu.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-            document.addEventListener('click', () => {
-                dropdownMenu.classList.remove('active');
-                menuToggle.style.transform = 'rotate(0deg)';
-            });
-        }
+        const body = document.body;
 
-        // Explore Components button with smooth scroll
-        const exploreComponentsBtn = document.getElementById('exploreComponentsBtn');
-        if (exploreComponentsBtn) {
-            exploreComponentsBtn.addEventListener('click', () => {
-                const nextSection = document.querySelector('.part-discovery-section');
-                if (nextSection) {
-                    nextSection.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Add animation class to elements in next section
-                    setTimeout(() => {
-                        const elements = nextSection.querySelectorAll('.animate-reveal');
-                        elements.forEach((el, index) => {
-                            setTimeout(() => {
-                                el.classList.add('is-visible');
-                            }, index * 100);
-                        });
-                    }, 300);
+        if (menuToggle && dropdownMenu) {
+            menuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isActive = dropdownMenu.classList.contains('active');
+                const icon = menuToggle.querySelector('i');
+                
+                if (isActive) {
+                    // Close menu
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    icon.className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                } else {
+                    // Open menu
+                    dropdownMenu.classList.add('active');
+                    menuToggle.style.transform = 'rotate(90deg)';
+                    icon.className = 'fas fa-times';
+                    body.classList.add('no-scroll');
                 }
+            });
+
+            // Close menu when clicking on a link
+            dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && dropdownMenu.classList.contains('active')) {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Prevent menu from closing when clicking inside it
+            dropdownMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
             });
         }
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assests/1000055723.jpg" type="image/png">
-    <link href="./styles/finance.css" rel="stylesheet" />
+    <link href="../styles/finance.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -326,33 +326,67 @@
     // 1. HAMBURGER MENU LOGIC
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
-    
-    const menuIcon = menuToggle.querySelector('i');
+    const body = document.body;
 
-    if (menuToggle && dropdownMenu) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle('active');
-            
-            // Toggle Icon and Rotate Animation
-            if (dropdownMenu.classList.contains('active')) {
-                menuIcon.classList.replace('fa-bars', 'fa-times');
-                menuToggle.style.transform = 'rotate(90deg)';
-            } else {
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-                menuToggle.style.transform = 'rotate(0deg)';
-            }
-        });
+        if (menuToggle && dropdownMenu) {
+            menuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isActive = dropdownMenu.classList.contains('active');
+                const icon = menuToggle.querySelector('i');
+                
+                if (isActive) {
+                    // Close menu
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    icon.className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                } else {
+                    // Open menu
+                    dropdownMenu.classList.add('active');
+                    menuToggle.style.transform = 'rotate(90deg)';
+                    icon.className = 'fas fa-times';
+                    body.classList.add('no-scroll');
+                }
+            });
 
-        // Close menu when clicking anywhere else on the screen
-        document.addEventListener('click', (e) => {
-            if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                dropdownMenu.classList.remove('active');
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-                menuToggle.style.transform = 'rotate(0deg)';
-            }
-        });
-    }
+            // Close menu when clicking on a link
+            dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && dropdownMenu.classList.contains('active')) {
+                    dropdownMenu.classList.remove('active');
+                    menuToggle.style.transform = 'rotate(0deg)';
+                    menuToggle.querySelector('i').className = 'fas fa-bars';
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Prevent menu from closing when clicking inside it
+            dropdownMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
 
     // 2. HEADER SCROLL EFFECTS
     const header = document.getElementById('mainHeader');
